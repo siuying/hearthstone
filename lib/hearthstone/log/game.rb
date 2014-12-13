@@ -1,5 +1,6 @@
 require_relative "./game_turn"
 require_relative "./game_player"
+require 'json'
 
 module Hearthstone
   module Log
@@ -19,7 +20,7 @@ module Hearthstone
 
       def add_turn(number: number, player: player, timestamp: timestamp)
         if !self.current_turn || number > self.current_turn.number
-          @turns.push(GameTurn.new(number: number, player: player, timestamp: timestamp))
+          @turns << GameTurn.new(number: number, player: player, timestamp: timestamp)
         end
       end
 
@@ -34,6 +35,22 @@ module Hearthstone
           players[name] = player
         end
         player
+      end
+
+      def to_hash
+        players_hash = players.values.collect(&:to_hash)
+        turns_hash = turns.collect(&:to_hash)
+
+        {
+          mode: mode, 
+          players: players_hash, 
+          turns: turns_hash, 
+          results: results
+        }
+      end
+
+      def to_json
+        to_hash.to_json
       end
     end
   end

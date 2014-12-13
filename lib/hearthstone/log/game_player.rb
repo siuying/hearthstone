@@ -8,6 +8,16 @@ module Hearthstone
         @name = name
       end
 
+      def to_hash
+        {
+          id: id, 
+          name: name, 
+          first_player: first_player, 
+          hero: hero,
+          hero_power: hero_power
+        }
+      end
+
     end
   end
 end

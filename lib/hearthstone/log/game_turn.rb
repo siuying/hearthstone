@@ -18,6 +18,15 @@ module Hearthstone
           @events.push([event, data])
         end
       end
+
+      def to_hash
+        {
+          number: number,
+          player: player,
+          timestamp: timestamp,
+          events: events
+        }
+      end
     end
   end
 end
