@@ -7,20 +7,6 @@ describe Hearthstone::Log::Parser, "#parse_line" do
     expect(result).to eq([:startup])
   end
 
-  it "returns game modes" do
-    result = parser.parse_line("[Bob] ---RegisterScreenTourneys---")
-    expect(result).to eq([:mode, :play])
-
-    result = parser.parse_line("[Bob] ---RegisterScreenForge---")
-    expect(result).to eq([:mode, :arena])
-
-    result = parser.parse_line("[Bob] ---RegisterScreenPractice---")
-    expect(result).to eq([:mode, :practice])
-
-    result = parser.parse_line("[Bob] ---RegisterScreenFriendly---")
-    expect(result).to eq([:mode, :friendly])
-  end
-
   it "returns choice" do
     result = parser.parse_line("[Power] GameState.SendChoices() - id=3 ChoiceType=GENERAL")
     expect(result).to eq([:choice_type, "GENERAL"])
@@ -46,6 +32,9 @@ describe Hearthstone::Log::Parser, "#parse_line" do
 
     result = parser.parse_line("[LoadingScreen] LoadingScreen.OnSceneLoaded() - prevMode=GAMEPLAY currMode=TOURNAMENT")
     expect(result).to eq([:mode, :ranked])
+
+    result = parser.parse_line("[LoadingScreen] LoadingScreen.OnSceneLoaded() - prevMode=HUB currMode=ADVENTURE")
+    expect(result).to eq([:mode, :solo])
   end
 
   it "returns legend rank" do

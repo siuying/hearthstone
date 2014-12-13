@@ -3,42 +3,14 @@ module Hearthstone
     class Parser
       attr_accessor :debug
 
-      GAME_MODE_MAPPINGS = {
-        "RegisterScreenPractice" => :practice, 
-        "RegisterScreenTourneys" => :play,
-        "RegisterScreenForge" => :arena,
-        "RegisterFriendChallenge" => :solo,
-        "RegisterScreenFriendly" => :friendly
-      }
-
       def initialize
         @debug = false
-      end
-
-      def parse(io, &handler)
-        io.each_line do |line|
-          result = parse_line(line)
-          if result
-            name = result[0]
-            data = result[1]
-
-            if debug
-              yield name, data, line
-            else
-              yield name, data
-            end
-          end
-        end
       end
 
       def parse_line(line)
         case line
         when /^Initialize engine version/
           return [:startup]
-
-        when /\[Bob\] ---(\w+)---/
-          mode = GAME_MODE_MAPPINGS[$1]
-          return [:mode, mode] if mode
 
         when /\[Power\] .* Begin Spectating/
           return [:begin_spectator_mode]
@@ -53,6 +25,8 @@ module Hearthstone
             return [:mode, :arena]
           when "TOURNAMENT"
             return [:mode, :ranked]
+          when "ADVENTURE"
+            return [:mode, :solo]
           end
         when /\[Bob\] legend rank (\d*)/
           rank = $1.to_i
