@@ -1,6 +1,8 @@
 require 'claide'
 require 'json'
+
 require 'fileutils'
+require 'file/tail'
 
 require_relative '../log'
 
@@ -37,8 +39,22 @@ class RecorderCommand < CLAide::Command
 
   def run
     logger = Hearthstone::Log::GameLogger.new(self)
+
     if self.complete
-      logger.parse(File.open(self.input).read)
+      logger.log_file(File.open(self.input).read)
+    end
+
+    params = {}
+    params[:backward] = 10 unless self.complete
+
+    File::Tail::Logfile.open(self.input, params) do |file|
+      begin
+        file.interval = 10
+        file.tail do |line|
+          logger.log_line(line)
+        end
+      rescue Interrupt
+      end
     end
   end
 
@@ -46,9 +62,15 @@ class RecorderCommand < CLAide::Command
   def on_game_over(game)
     json = game.to_json
     filename = filename_with_game(game)
+
+    puts "Game recorded: #{game.players.first.name} vs #{game.players.last.name}"
     File.open(File.join(self.output, filename), "w") do |f|
       f.write(json)
     end
+  end
+
+  def on_game_mode(mode)
+    puts "Game mode detected: #{mode}"
   end
 
   private

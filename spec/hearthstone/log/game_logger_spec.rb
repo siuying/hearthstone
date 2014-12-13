@@ -5,7 +5,8 @@ require 'pry'
 describe Hearthstone::Log::GameLogger do
   let(:delegate) { double(:delegate) }
   let(:subject) { Hearthstone::Log::GameLogger.new(delegate) }
-  context "#parse" do
+
+  context "#log_file" do
     it "parse basic game info" do
       filename = File.join(File.dirname(__FILE__), "../../fixtures/gamelog1.log")
       File.open(filename) do |file|
@@ -28,7 +29,7 @@ describe Hearthstone::Log::GameLogger do
         end
 
         log = file.read
-        subject.parse(log)
+        subject.log_file(log)
       end
     end
 
@@ -41,7 +42,7 @@ describe Hearthstone::Log::GameLogger do
         end
 
         log = file.read
-        subject.parse(log)
+        subject.log_file(log)
 
         game = games.last
         expect(game.mode).to eq(:ranked)
