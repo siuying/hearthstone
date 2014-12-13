@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Hearthstone::VERSION
   spec.authors       = ["Francis Chong"]
   spec.email         = ["francis@ignition.hk"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.summary       = %q{Utlities for Hearthstone.}
+  spec.description   = %q{Utlities for Hearthstone. First, a game recorder.}
   spec.homepage      = ""
   spec.license       = "MIT"
 
