@@ -7,7 +7,7 @@ describe Hearthstone::Log::GameLogger do
 
   context "#parse" do
     it "parse basic game info" do
-      log = File.open(File.join(File.dirname(__FILE__), "../../fixtures/gamelog1.log")).read
+      log = File.open(File.join(File.dirname(__FILE__), "../../fixtures/gamelog2.log")).read
       result = subject.parse(log)
       binding.pry
     end
