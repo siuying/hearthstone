@@ -6,6 +6,7 @@ module Hearthstone
 
       def initialize(name)
         @name = name
+        @first_player = false
       end
 
       def to_hash

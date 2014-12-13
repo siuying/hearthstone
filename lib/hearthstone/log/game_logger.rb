@@ -41,6 +41,10 @@ module Hearthstone
             on_first_player(data)
           when :attack, :attacked
             # ignored
+          when :set_hero
+            on_set_hero(data)
+          when :set_hero_power
+            on_set_hero_power(data)
           else
             if event
               on_event(event, data, line)
@@ -72,6 +76,14 @@ module Hearthstone
 
       def on_first_player(name: name)
         self.game.player_with_name(name).first_player = true
+      end
+
+      def on_set_hero(player: player, id: id, card_id: card_id)
+        self.game.player_with_id(player).hero = {id: id, card_id: card_id}
+      end
+
+      def on_set_hero_power(player: player, id: id, card_id: card_id)
+        self.game.player_with_id(player).hero_power = {id: id, card_id: card_id}
       end
 
       def on_game_over(name: name, state: state)

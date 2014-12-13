@@ -37,6 +37,10 @@ module Hearthstone
         player
       end
 
+      def player_with_id(player_id)
+        players.values.detect {|p| p.id == player_id }
+      end
+
       def to_hash
         players_hash = players.values.collect(&:to_hash)
         turns_hash = turns.collect(&:to_hash)
