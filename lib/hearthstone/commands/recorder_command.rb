@@ -74,6 +74,6 @@ class RecorderCommand < CLAide::Command
   end
 
   def on_event(event, data)
-    puts "event: #{event.to_s} -> #{data}"
+    # puts "event: #{event.to_s} -> #{data}"
   end
 end
