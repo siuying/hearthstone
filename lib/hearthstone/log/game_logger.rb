@@ -9,6 +9,8 @@ module Hearthstone
       attr_reader :games
       attr_accessor :mode, :spectator_mode, :game
 
+      IGNORED_EVENTS = [:attack, :attacked]
+
       def initialize(parser=Parser.new)
         @parser = parser
 
@@ -19,7 +21,7 @@ module Hearthstone
       end
 
       def parse(io)
-        parser.parse(io) do |event, data|
+        parser.parse(io) do |event, data, line|
           case event
           when :game_start
             on_game_start
@@ -87,8 +89,8 @@ module Hearthstone
         self.game.add_turn(number: turn)
       end
 
-      def on_event(event, data)
-        self.game.current_turn.add_event(event, data)
+      def on_event(event, data, line)
+        self.game.current_turn.add_event(event, data, line)
       end
 
       def on_game_end_cleanup

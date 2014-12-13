@@ -20,7 +20,12 @@ module Hearthstone
           if result
             name = result[0]
             data = result[1]
-            yield name, data
+
+            if debug
+              yield name, data, line
+            else
+              yield name, data
+            end
           end
         end
       end

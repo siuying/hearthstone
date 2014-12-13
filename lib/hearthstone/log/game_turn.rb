@@ -11,8 +11,12 @@ module Hearthstone
         @timestamp = timestamp        
       end
 
-      def add_event(event, data)
-        @events.push([event, data])
+      def add_event(event, data, line)
+        if line
+          @events.push([event, data, line])
+        else
+          @events.push([event, data])
+        end
       end
     end
   end
