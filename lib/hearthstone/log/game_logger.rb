@@ -22,7 +22,7 @@ module Hearthstone
         parser.parse(io) do |event, data, line|
           case event
           when :game_start
-            on_game_start
+            # ignored
           when :game_over
             on_game_over(data)
           when :turn_start
@@ -64,10 +64,6 @@ module Hearthstone
 
       def on_end_spectator_mode
         self.spectator_mode = false
-      end
-
-      def on_game_start()
-        # start
       end
 
       def on_player_id(name: name, player_id: player_id)
