@@ -1,6 +1,8 @@
 module Hearthstone
   module Log
     class Parser
+      attr_accessor :delegate
+
       GAME_MODE_MAPPINGS = {
         "RegisterScreenPractice" => :practice, 
         "RegisterScreenTourneys" => :casual,
@@ -8,14 +10,11 @@ module Hearthstone
         "RegisterScreenFriendly" => :friendly
       }
 
-      def initialize
-      end
-
       def parse(io)
         io.each_line do |line|
           result = parse_line(line)
-          if result
-
+          if result && delegate
+            delegate.on_event(result[0], result[1])
           end
         end
       end
@@ -113,16 +112,16 @@ module Hearthstone
       def parse_power_tag_change(type, player, state)
         case type
         when "PLAYER_ID"
-          return [:player_id, player, state.to_i]
+          return [:player_id, name: player, player_id: state.to_i]
         when "FIRST_PLAYER"
-          return [:first_player, player]
+          return [:first_player, name: player]
         when "PLAYSTATE"
-          return [:game_over, player, state]
+          return [:game_over, name: player, state: state]
         when "TURN_START"
           if player == "GameEntity"
             return [:game_start]
           else
-            return [:turn_start, player, state.to_i]
+            return [:turn_start, name: player, timestamp: state.to_i]
           end
         when "TURN"
           return [:turn, state.to_i]

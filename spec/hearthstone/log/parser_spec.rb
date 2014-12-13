@@ -58,16 +58,16 @@ describe Hearthstone::Log::Parser, "#parse_line" do
 
   it "returns player state change" do
     result = parser.parse_line("[Power] GameState.DebugPrintPower() - TAG_CHANGE Entity=siuying tag=PLAYER_ID value=2")
-    expect(result).to eq([:player_id, "siuying", 2])
+    expect(result).to eq([:player_id, name: "siuying", player_id: 2])
 
     result = parser.parse_line("[Power] GameState.DebugPrintPower() - TAG_CHANGE Entity=begize tag=FIRST_PLAYER value=1")
-    expect(result).to eq([:first_player, "begize"])
+    expect(result).to eq([:first_player, name: "begize"])
 
     result = parser.parse_line("[Power] GameState.DebugPrintPower() - TAG_CHANGE Entity=begize tag=PLAYSTATE value=WON")
-    expect(result).to eq([:game_over, "begize", "WON"])
+    expect(result).to eq([:game_over, name: "begize", state: "WON"])
 
     result = parser.parse_line("[Power] GameState.DebugPrintPower() -     TAG_CHANGE Entity=siuying tag=TURN_START value=1418309639")
-    expect(result).to eq([:turn_start, "siuying", 1418309639])
+    expect(result).to eq([:turn_start, name: "siuying", timestamp: 1418309639])
 
     result = parser.parse_line("[Power] GameState.DebugPrintPower() -     TAG_CHANGE Entity=GameEntity tag=TURN value=3")
     expect(result).to eq([:turn, 3])
