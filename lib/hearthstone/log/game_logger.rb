@@ -9,8 +9,6 @@ module Hearthstone
       attr_reader :games
       attr_accessor :mode, :spectator_mode, :game
 
-      IGNORED_EVENTS = [:attack, :attacked]
-
       def initialize(parser=Parser.new)
         @parser = parser
 
@@ -41,8 +39,10 @@ module Hearthstone
             on_player_id(data)
           when :first_player
             on_first_player(data)
+          when :attack, :attacked
+            # ignored
           else
-            if event && !IGNORED_EVENTS.include?(event)
+            if event
               on_event(event, data, line)
             end
           end
