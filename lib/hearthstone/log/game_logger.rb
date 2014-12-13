@@ -29,10 +29,8 @@ module Hearthstone
             on_turn_start(data)
           when :turn
             on_turn(data)
-          when :begin_spectator_mode
-            on_begin_spectator_mode
-          when :end_spectator_mode
-            on_end_spectator_mode
+          when :begin_spectator_mode, :end_spectator_mode
+            # ignored
           when :mode
             on_game_mode(data)
           when :player_id
@@ -56,14 +54,6 @@ module Hearthstone
       private
       def on_game_mode(mode)
         self.game.mode = mode
-      end
-
-      def on_begin_spectator_mode
-        self.spectator_mode = true
-      end
-
-      def on_end_spectator_mode
-        self.spectator_mode = false
       end
 
       def on_player_id(name: name, player_id: player_id)
