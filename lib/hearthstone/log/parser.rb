@@ -55,7 +55,7 @@ module Hearthstone
           card = $2
           return [:open_card, id: id, card_id: card]
 
-        when /\[Power\] GameState.DebugPrintPower\(\) -\s*TAG_CHANGE Entity=\[.*id=(\d*).* cardId=(.*) player=(\d)\] tag=(.*) value=(.*)/
+        when /\[Power\] GameState.DebugPrintPower\(\) -\s*TAG_CHANGE Entity=\[.*id=(\d*).* cardId=(.*?) .* ?player=(\d)\] tag=(.*) value=(.*)/
           id = $1.to_i
           card_id = $2
           player = $3.to_i
@@ -148,11 +148,11 @@ module Hearthstone
       def parse_power_tag_change_entity(type, id, card_id, player, amount)
         case type
         when "DAMAGE"
-          return [:damaged, id: id, card_id: card_id, player: player, amount: amount]
+          return [:damaged, id: id, card_id: card_id, player: player, amount: amount] if amount > 0
         when "ATTACKING"
-          return [:attack, id: id, card_id: card_id] if amount == 1
+          return [:attack, id: id, card_id: card_id, player: player] if amount == 1
         when "DEFENDING"
-          return [:attacked, id: id, card_id: card_id] if amount == 1
+          return [:attacked, id: id, card_id: card_id, player: player] if amount == 1
         when "CARD_TARGET"
           return [:card_target, id: id, card_id: card_id, player: player, target: amount]
         else
