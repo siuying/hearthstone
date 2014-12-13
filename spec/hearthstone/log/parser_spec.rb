@@ -56,6 +56,11 @@ describe Hearthstone::Log::Parser, "#parse_line" do
     expect(result).to be_nil
   end
 
+  it "returns action start" do
+    result = parser.parse_line("[Power] GameState.DebugPrintPower() - ACTION_START Entity=[name=Undertaker id=59 zone=PLAY zonePos=1 cardId=FP1_028 player=2] SubType=ATTACK Index=-1 Target=[name=Rexxar id=4 zone=PLAY zonePos=0 cardId=HERO_05 player=1]")
+    expect(result).to eq([:action_start,  {:subtype=>"ATTACK", :from=>{:id=>59, :card_id=>"FP1_028", :player=>2}, :to=>{:id=>4, :card_id=>"HERO_05", :player=>1}}])
+  end
+
   it "returns player state change" do
     result = parser.parse_line("[Power] GameState.DebugPrintPower() - TAG_CHANGE Entity=siuying tag=PLAYER_ID value=2")
     expect(result).to eq([:player_id, name: "siuying", player_id: 2])

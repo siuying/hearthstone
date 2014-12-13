@@ -72,6 +72,15 @@ module Hearthstone
         when /\[Power\] GameState.SendChoices\(\) - id=(\d*) ChoiceType=(.*)/
           return [:choice_type, $2]
 
+        when /\[Power\] GameState.DebugPrintPower\(\) - ACTION_START Entity=\[name=.* id=(\d*) .* cardId=(.*) player=(\d)\] SubType=ATTACK .* Target=\[name=.* id=(\d*) .* cardId=(.*) player=(\d)\]/
+          from_id = $1.to_i
+          from_card_id = $2
+          from_player = $3.to_i
+          to_id = $4.to_i
+          to_card_id = $5
+          to_player = $6.to_i
+          return [:action_start, subtype: 'ATTACK', :from => {id: from_id, card_id: from_card_id, player: from_player}, :to => {id: to_id, card_id: to_card_id, player: to_player}]
+
         when /\[Power\] GameState.SendChoices\(\) -\s*m_chosenEntities\[0\]=\[name=(.*) id=(\d*) zone=(SETASIDE|HAND).*cardId=(.*) player=(\d)\]/
           name = $1
           id = $2.to_i
