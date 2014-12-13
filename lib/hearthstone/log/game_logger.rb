@@ -42,7 +42,9 @@ module Hearthstone
           when :first_player
             on_first_player(data)
           else
-            on_event(event, data)
+            if event && !IGNORED_EVENTS.include?(event)
+              on_event(event, data, line)
+            end
           end
         end
       end
