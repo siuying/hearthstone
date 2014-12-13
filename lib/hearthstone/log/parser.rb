@@ -5,8 +5,9 @@ module Hearthstone
 
       GAME_MODE_MAPPINGS = {
         "RegisterScreenPractice" => :practice, 
-        "RegisterScreenTourneys" => :casual,
+        "RegisterScreenTourneys" => :play,
         "RegisterScreenForge" => :arena,
+        "RegisterFriendChallenge" => :solo,
         "RegisterScreenFriendly" => :friendly
       }
 
