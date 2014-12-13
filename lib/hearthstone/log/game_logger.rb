@@ -1,5 +1,5 @@
 require_relative "./parser"
-require_relative "../data"
+require_relative "./data"
 
 module Hearthstone
   module Log
