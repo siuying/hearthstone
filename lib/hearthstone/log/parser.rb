@@ -11,6 +11,15 @@ module Hearthstone
       def initialize
       end
 
+      def parse(io)
+        io.each_line do |line|
+          result = parse_line(line)
+          if result
+
+          end
+        end
+      end
+
       def parse_line(line)
         case line
         when /^Initialize engine version/
@@ -36,11 +45,10 @@ module Hearthstone
           rank = $1.to_i
           return [:legend, rank] if rank > 0
 
-
         when /\[Power\] GameState.DebugPrintPower\(\) -\s*FULL_ENTITY.*Creating ID=(\d*) CardID=(?!GAME)(?!HERO)(.+)/
           id = $1.to_i
           card = $2
-          return [:open_card, id, card]
+          return [:open_card, id: id, card_id: card]
 
         when /\[Power\] GameState.DebugPrintPower\(\) -\s*TAG_CHANGE Entity=\[.*id=(\d*).* cardId=(.*) player=(\d)\] tag=(.*) value=(.*)/
           id = $1.to_i
@@ -56,17 +64,20 @@ module Hearthstone
           state = $3
           return parse_power_tag_change(type, player, state)
 
-        when /\[Power\] GameState.SendChoices\(\) -\s*m_chosenEntities\[0\]=\[name=(.*) id=(\d*) zone=SETASIDE.*cardId=(.*) player=(\d)\]/
+        when /\[Power\] GameState.SendChoices\(\) - id=(\d*) ChoiceType=(.*)/
+          return [:choice_type, $2]
+
+        when /\[Power\] GameState.SendChoices\(\) -\s*m_chosenEntities\[0\]=\[name=(.*) id=(\d*) zone=(SETASIDE|HAND).*cardId=(.*) player=(\d)\]/
           name = $1
           id = $2.to_i
-          card_id = $3.to_i
-          player = $4.to_i
-          return [:choose, name, card_id, id, player]
+          card_id = $4
+          player = $5.to_i
+          return [:choose, id: id, card_id: card_id, player: player]
 
         when /\[Power\] GameState.DebugPrintPower\(\).*TAG_CHANGE Entity=\[name=.* id=.* zone=PLAY zonePos=0 cardId=(.*) player=(\d)\] tag=EXHAUSTED value=1/
           card_id = $1
           player = $2.to_i
-          return [:hero_power, card_id, player]
+          return [:hero_power, card_id: card_id, player: player]
 
         when /\[Zone\] ZoneChangeList\.ProcessChanges\(\) - id=(\d*) local=(.*) \[name=(.*) id=(\d*) zone=(.*) zonePos=(\d*) cardId=(.*) player=(\d*)\] zone from (.*) -> (.*)/
           zone_id = $1
@@ -189,11 +200,11 @@ module Hearthstone
         end
 
         if from_zone == "" && to_zone =~ /PLAY \(Hero\)/
-          return [:hero, player: player, id: id, card_id: card_id]
+          return [:set_hero, player: player, id: id, card_id: card_id]
         end
 
         if from_zone == "" && to_zone =~ /PLAY \(Hero Power\)/
-          return [:hero_power, player: player, id: id, card_id: card_id]
+          return [:set_hero_power, player: player, id: id, card_id: card_id]
         end
 
         if from_zone == "" && to_zone =~ /PLAY/

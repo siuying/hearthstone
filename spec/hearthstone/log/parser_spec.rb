@@ -21,6 +21,17 @@ describe Hearthstone::Log::Parser, "#parse_line" do
     expect(result).to eq([:mode, :friendly])
   end
 
+  it "returns choice" do
+    result = parser.parse_line("[Power] GameState.SendChoices() - id=3 ChoiceType=GENERAL")
+    expect(result).to eq([:choice_type, "GENERAL"])
+
+    result = parser.parse_line("[Power] GameState.SendChoices() -   m_chosenEntities[0]=[name=Feign Death id=38 zone=HAND zonePos=3 cardId=GVG_026 player=2]")
+    expect(result).to eq([:choose, id: 38, card_id: 'GVG_026', player: 2])
+
+    result = parser.parse_line("[Power] GameState.SendChoices() -   m_chosenEntities[0]=[name=Undertaker id=8 zone=SETASIDE zonePos=0 cardId=FP1_028 player=1]")
+    expect(result).to eq([:choose, id: 8, card_id: 'FP1_028', player: 1])
+  end
+
   it "returns spectator mode" do
     result = parser.parse_line("[Power]  Begin Spectating")
     expect(result).to eq([:begin_spectator_mode])
@@ -122,19 +133,19 @@ describe Hearthstone::Log::Parser, "#parse_line" do
 
       line = "[Zone] ZoneChangeList.ProcessChanges() - id=1 local=False [name=Jaina Proudmoore id=4 zone=PLAY zonePos=0 cardId=HERO_08 player=1] zone from  -> FRIENDLY PLAY (Hero)"
       result = parser.parse_line(line)
-      expect(result).to eq([:hero, player: 1, id: 4, card_id: 'HERO_08'])
+      expect(result).to eq([:set_hero, player: 1, id: 4, card_id: 'HERO_08'])
 
       line = "[Zone] ZoneChangeList.ProcessChanges() - id=1 local=False [name=Gul'dan id=36 zone=PLAY zonePos=0 cardId=HERO_07 player=2] zone from  -> OPPOSING PLAY (Hero)"
       result = parser.parse_line(line)
-      expect(result).to eq([:hero, player: 2, id: 36, card_id: 'HERO_07'])
+      expect(result).to eq([:set_hero, player: 2, id: 36, card_id: 'HERO_07'])
 
       line = "[Zone] ZoneChangeList.ProcessChanges() - id=1 local=False [name=Steady Shot id=5 zone=PLAY zonePos=0 cardId=DS1h_292 player=1] zone from  -> FRIENDLY PLAY (Hero Power)"
       result = parser.parse_line(line)
-      expect(result).to eq([:hero_power, player: 1, id: 5, card_id: 'DS1h_292'])
+      expect(result).to eq([:set_hero_power, player: 1, id: 5, card_id: 'DS1h_292'])
 
       line = "[Zone] ZoneChangeList.ProcessChanges() - id=1 local=False [name=Steady Shot id=37 zone=PLAY zonePos=0 cardId=DS1h_292 player=2] zone from  -> OPPOSING PLAY (Hero Power)"
       result = parser.parse_line(line)
-      expect(result).to eq([:hero_power, player: 2, id: 37, card_id: 'DS1h_292'])
+      expect(result).to eq([:set_hero_power, player: 2, id: 37, card_id: 'DS1h_292'])
     end
 
     it "handles deck" do
