@@ -1,5 +1,5 @@
 require_relative "./game_turn"
-require_relative "./game_turn"
+require_relative "./game_player"
 
 module Hearthstone
   module Log
@@ -13,10 +13,14 @@ module Hearthstone
         @players = {}
         @results = {}
         @turns = []
+
+        add_turn(number: 0, player: nil, timestamp: nil)
       end
 
       def add_turn(number: number, player: player, timestamp: timestamp)
-        @turns.push(GameTurn.new(number: number, player: player, timestamp: timestamp))
+        if !self.current_turn || number > self.current_turn.number
+          @turns.push(GameTurn.new(number: number, player: player, timestamp: timestamp))
+        end
       end
 
       def current_turn

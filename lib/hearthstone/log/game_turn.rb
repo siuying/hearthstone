@@ -4,7 +4,7 @@ module Hearthstone
       attr_accessor :number, :player, :timestamp
       attr_reader :events
 
-      def initialize(number: number, player: player, timestamp: timestamp)
+      def initialize(number: number=nil, player: player=nil, timestamp: timestamp=nil)
         @events = []
         @number = number
         @player = player

@@ -6,20 +6,20 @@ module Hearthstone
     class GameLogger
       attr_reader :logfile, :parser
 
-      attr_accessor :mode, :spectator_mode, :turn
+      attr_reader :games
+      attr_accessor :mode, :spectator_mode, :game
 
-      def initialize(logfile, parser=Parser.new)
-        @logfile = logfile
+      def initialize(parser=Parser.new)
         @parser = parser
 
         @mode = nil
         @spectator_mode = false 
-        @game = nil
-        @turn = 1
+        @game = Game.new(self.mode)
+        @games = []
       end
 
-      def parse
-        parser.parse(File.open(logfile).read) do |event, data|
+      def parse(io)
+        parser.parse(io) do |event, data|
           case event
           when :game_start
             on_game_start
@@ -47,7 +47,7 @@ module Hearthstone
 
       private
       def on_game_mode(mode)
-        self.mode = mode
+        self.game.mode = mode
       end
 
       def on_begin_spectator_mode
@@ -59,37 +59,41 @@ module Hearthstone
       end
 
       def on_game_start()
-        self.on_game_end_cleanup
-        self.game = Game.new(self.mode)
+        # start
       end
 
-      def on_player_id(name: player, player_id: player_id)
-        self.game.player_with_name(player).player_id = player_id
+      def on_player_id(name: name, player_id: player_id)
+        self.game.player_with_name(name).id = player_id
       end
 
-      def on_first_player(name: player)
-        self.game.player_with_name(player).first_player = true
+      def on_first_player(name: name)
+        self.game.player_with_name(name).first_player = true
       end
 
-      def on_game_over(name: player, state: state)
-        self.game.results[player] = state
+      def on_game_over(name: name, state: state)
+        self.game.results[name] = state
+
+        if self.game.results.size == 2
+          on_game_end_cleanup
+        end
       end
 
-      def on_turn_start(name: player, timestamp: timestamp)
-        self.game.add_turn(number: self.turn, player: player, timestamp: timestamp)
+      def on_turn_start(name: name, timestamp: timestamp)
+        self.game.current_turn.player = name
+        self.game.current_turn.timestamp = timestamp
       end
 
       def on_turn(turn)
-        self.turn = turn
+        self.game.add_turn(number: turn)
       end
 
-      def on_event(data)
+      def on_event(event, data)
         self.game.current_turn.add_event(event, data)
       end
 
       def on_game_end_cleanup
-        self.turn = 1
-        self.game = nil
+        self.games << self.game
+        self.game = Game.new(self.mode)
       end
     end
   end

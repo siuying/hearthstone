@@ -1,6 +1,8 @@
 module Hearthstone
   module Log
     class Parser
+      attr_accessor :debug
+
       GAME_MODE_MAPPINGS = {
         "RegisterScreenPractice" => :practice, 
         "RegisterScreenTourneys" => :casual,
@@ -8,13 +10,17 @@ module Hearthstone
         "RegisterScreenFriendly" => :friendly
       }
 
+      def initialize
+        @debug = false
+      end
+
       def parse(io, &handler)
         io.each_line do |line|
           result = parse_line(line)
           if result
             name = result[0]
             data = result[1]
-            handler(name, data)
+            yield name, data
           end
         end
       end
@@ -114,7 +120,7 @@ module Hearthstone
         when "FIRST_PLAYER"
           return [:first_player, name: player]
         when "PLAYSTATE"
-          return [:game_over, name: player, state: state]
+          return [:game_over, name: player, state: state] if state == "WON" || state == "LOST"
         when "TURN_START"
           if player == "GameEntity"
             return [:game_start]
@@ -123,8 +129,10 @@ module Hearthstone
           end
         when "TURN"
           return [:turn, state.to_i]
+        when "ATTACHED"
+          return [:attached, card_id: player.to_i, target: state.to_i]
         else
-          raise "unknown entity: %s, %s, %s" % [type, player, state]
+          raise "unknown entity: %s, %s, %s" % [type, player, state] if debug
         end
       end
 
@@ -133,13 +141,13 @@ module Hearthstone
         when "DAMAGE"
           return [:damaged, id: id, card_id: card_id, player: player, amount: amount]
         when "ATTACKING"
-          return [:attack, id: id, card_id: card_id, player: player]
+          return [:attack, id: id, card_id: card_id] if amount == 1
         when "DEFENDING"
-          return [:attacked, id: id, card_id: card_id, player: player]
+          return [:attacked, id: id, card_id: card_id] if amount == 1
         when "CARD_TARGET"
           return [:card_target, id: id, card_id: card_id, player: player, target: amount]
         else
-          raise "unknown entity: %s, %s, %s, %s, %s" % [type, id, card_id, player, amount]
+          raise "unknown entity: %s, %s, %s, %s, %s" % [type, id, card_id, player, amount] if debug
         end
       end
 
@@ -168,7 +176,7 @@ module Hearthstone
           return parse_zone_to_setaside(card_zone, from_zone, to_zone, card, card_id, player, id)
         end
 
-        raise "unsupported play: %s, %s, %s, %s, %s, %s, %s" % [card_zone, from_zone, to_zone, card, card_id, player, id]
+        raise "unsupported play: %s, %s, %s, %s, %s, %s, %s" % [card_zone, from_zone, to_zone, card, card_id, player, id] if debug
       end
 
       def parse_zone_to_hand(card_zone, from_zone, to_zone, card, card_id, player, id)
@@ -184,7 +192,7 @@ module Hearthstone
           return [:card_returned, player: player, id: id, card_id: card_id]
         end
 
-        raise "unsupported hand: %s, %s, %s, %s, %s, %s, %s" % [card_zone, from_zone, to_zone, card, card_id, player, id]
+        raise "unsupported hand: %s, %s, %s, %s, %s, %s, %s" % [card_zone, from_zone, to_zone, card, card_id, player, id] if debug
       end
 
       def parse_zone_to_play(card_zone, from_zone, to_zone, card, card_id, player, id)
@@ -208,7 +216,7 @@ module Hearthstone
           return [:card_put_in_play, player: player, id: id, card_id: card_id]
         end
 
-        raise "unsupported play: %s, %s, %s, %s, %s, %s, %s" % [card_zone, from_zone, to_zone, card, card_id, player, id]
+        raise "unsupported play: %s, %s, %s, %s, %s, %s, %s" % [card_zone, from_zone, to_zone, card, card_id, player, id] if debug
       end
 
       def parse_zone_to_deck(card_zone, from_zone, to_zone, card, card_id, player, id)
@@ -220,7 +228,7 @@ module Hearthstone
           return [:card_added_to_deck, player: player, id: id, card_id: card_id]
         end
 
-        raise "unsupported deck: %s, %s, %s, %s, %s, %s, %s" % [card_zone, from_zone, to_zone, card, card_id, player, id]
+        raise "unsupported deck: %s, %s, %s, %s, %s, %s, %s" % [card_zone, from_zone, to_zone, card, card_id, player, id] if debug
       end
       
       def parse_zone_to_graveyard(card_zone, from_zone, to_zone, card, card_id, player, id)
@@ -240,7 +248,7 @@ module Hearthstone
           return [:card_destroyed, player: player, id: id, card_id: card_id]
         end
 
-        raise "unsupported gy: %s, %s, %s, %s, %s, %s, %s" % [card_zone, from_zone, to_zone, card, card_id, player, id]
+        raise "unsupported gy: %s, %s, %s, %s, %s, %s, %s" % [card_zone, from_zone, to_zone, card, card_id, player, id] if debug
       end
 
       def parse_zone_to_secret(card_zone, from_zone, to_zone, card, card_id, player, id)
@@ -256,7 +264,7 @@ module Hearthstone
           return [:card_revealed, player: player, id: id, card_id: card_id]
         end
 
-        raise "unsupported secret: %s, %s, %s, %s, %s, %s, %s" % [card_zone, from_zone, to_zone, card, card_id, player, id]
+        raise "unsupported secret: %s, %s, %s, %s, %s, %s, %s" % [card_zone, from_zone, to_zone, card, card_id, player, id] if debug
       end
 
       def parse_zone_to_setaside(card_zone, from_zone, to_zone, card, card_id, player, id)
@@ -268,7 +276,7 @@ module Hearthstone
           return [:card_setaside, player: player, id: id, card_id: card_id]
         end
 
-        raise "unsupported setaside: %s, %s, %s, %s, %s, %s, %s" % [card_zone, from_zone, to_zone, card, card_id, player, id]
+        raise "unsupported setaside: %s, %s, %s, %s, %s, %s, %s" % [card_zone, from_zone, to_zone, card, card_id, player, id] if debug
       end
 
     end
