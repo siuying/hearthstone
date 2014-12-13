@@ -1,8 +1,6 @@
 module Hearthstone
   module Log
     class Parser
-      attr_accessor :delegate
-
       GAME_MODE_MAPPINGS = {
         "RegisterScreenPractice" => :practice, 
         "RegisterScreenTourneys" => :casual,
@@ -10,11 +8,13 @@ module Hearthstone
         "RegisterScreenFriendly" => :friendly
       }
 
-      def parse(io)
+      def parse(io, &handler)
         io.each_line do |line|
           result = parse_line(line)
-          if result && delegate
-            delegate.on_event(result[0], result[1])
+          if result
+            name = result[0]
+            data = result[1]
+            handler(name, data)
           end
         end
       end
@@ -102,8 +102,6 @@ module Hearthstone
           from_zone = $9
           to_zone = $10
           return parse_zone(card_zone, from_zone, to_zone, "", card_id, player.to_i, id.to_i)
-
-        else
 
         end
       end
