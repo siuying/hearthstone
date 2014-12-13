@@ -7,11 +7,10 @@ module Hearthstone
   module Models
     # represent an object in game
     class Entity
-      attr_accessor :id, :card, :zone
-      def initialize(id: id, card: card, zone: zone=nil)
+      attr_accessor :id, :card
+      def initialize(id: id, card: card)
         @id = id
         @card = card
-        @zone = zone
       end
 
       def eql?(other)
@@ -20,6 +19,10 @@ module Hearthstone
 
       def hash
         id.hash
+      end
+
+      def to_s
+        "<Entity ##{id} \"#{card.name}\">"
       end
     end
 
@@ -50,6 +53,10 @@ module Hearthstone
             self.send(to_zone) << card
           end
         end
+      end
+
+      def to_s
+        "<Player ##{id} \"#{name}\">"
       end
     end
 
