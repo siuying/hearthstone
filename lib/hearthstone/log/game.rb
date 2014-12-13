@@ -11,7 +11,7 @@ module Hearthstone
       def initialize(mode)
         @mode = mode
 
-        @players = {}
+        @players = []
         @results = {}
         @turns = []
 
@@ -28,21 +28,17 @@ module Hearthstone
         @turns.last
       end
 
-      def player_with_name(name)
-        player = players[name]
+      def player_with_id_or_name(id: id, name: name)
+        player = players.detect {|p| (id && p.id == id) || (name && p.name == name) }
         unless player
-          player = GamePlayer.new(name)
-          players[name] = player
+          player = GamePlayer.new(name: name, id: id)
+          players << player
         end
         player
       end
 
-      def player_with_id(player_id)
-        players.values.detect {|p| p.id == player_id }
-      end
-
       def to_hash
-        players_hash = players.values.collect(&:to_hash)
+        players_hash = players.collect(&:to_hash)
         turns_hash = turns.collect(&:to_hash)
 
         {

@@ -57,19 +57,21 @@ module Hearthstone
       end
 
       def on_player_id(name: name, player_id: player_id)
-        self.game.player_with_name(name).id = player_id
+        player = self.game.player_with_id_or_name(name: name, id: player_id)
+        player.name = name
+        player.id = player_id
       end
 
       def on_first_player(name: name)
-        self.game.player_with_name(name).first_player = true
+        self.game.player_with_id_or_name(name: name).first_player = true
       end
 
       def on_set_hero(player: player, id: id, card_id: card_id)
-        self.game.player_with_id(player).hero = {id: id, card_id: card_id}
+        self.game.player_with_id_or_name(id: player).hero = {id: id, card_id: card_id}
       end
 
       def on_set_hero_power(player: player, id: id, card_id: card_id)
-        self.game.player_with_id(player).hero_power = {id: id, card_id: card_id}
+        self.game.player_with_id_or_name(id: player).hero_power = {id: id, card_id: card_id}
       end
 
       def on_game_over(name: name, state: state)
