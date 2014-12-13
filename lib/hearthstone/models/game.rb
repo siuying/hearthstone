@@ -5,17 +5,18 @@ module Hearthstone
   module Models
     # represent an object in game
     class Entity
-      attr_accessor :id, :card
-      def initialize(id: id, card: card)
+      attr_accessor :id, :card, :zone
+      def initialize(id: id, card: card, zone: zone=nil)
         @id = id
         @card = card
+        @zone = zone
       end
     end
 
     class Player
       attr_reader :id, :name, :first_player
       attr_accessor :hero, :hero_power
-      attr_reader :deck, :hand, :play
+      attr_reader :cards
 
       def initialize(id: id, name: name, first_player: first_player, hero: hero, hero_power: hero_power)
         @id = id
@@ -23,10 +24,27 @@ module Hearthstone
         @first_player = first_player
         @hero = hero
         @hero_power = hero_power
+        @cards = Set.new
+      end
 
-        @deck = []
-        @hand = []
-        @play = []
+      def deck
+        cards.select {|card| card.zone == :deck}
+      end
+
+      def hand
+        cards.select {|card| card.zone == :hand}
+      end
+
+      def play
+        cards.select {|card| card.zone == :play}
+      end
+
+      def graveyard
+        cards.select {|card| card.zone == :graveyard}
+      end
+
+      def setaside
+        cards.select {|card| card.zone == :setaside}
       end
     end
 
@@ -59,7 +77,8 @@ module Hearthstone
         player = player_with_id(player_id)
         raise "Player #{player_id} not found!" unless player
 
-        player.deck << entity
+        player.cards << entity
+        entity.zone = :deck
       end
 
       def card_received(player_id: player_id, id: id, card_id: card_id)
@@ -67,7 +86,8 @@ module Hearthstone
         player = player_with_id(player_id)
         raise "Player #{player_id} not found!" unless player
 
-        player.hand << entity
+        player.cards << entity
+        entity.zone = :hand
       end
 
       def process_turn(turn)

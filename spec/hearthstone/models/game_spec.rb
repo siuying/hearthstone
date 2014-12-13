@@ -26,6 +26,19 @@ describe Hearthstone::Models::Game do
     end
   end
 
+  context "#card_revealed" do
+    it "shows card from game" do
+      game.open_card(id: 34, card_id: "")
+      entity = game.entity_with_id(34)
+      expect(entity.card).to be_nil
+
+      game.card_revealed(id: 34, card_id: "FP1_020")
+      entity = game.entity_with_id(34)
+      expect(entity.card).to_not be_nil
+      expect(entity.card.name).to eq("Avenge")
+    end
+  end
+
   context "Game Started" do
     before(:each) do
       game.add_player(id: 2, name: "siuying", first_player: true, hero_id: 36, hero_card_id: "HERO_05", hero_power_id: 37, hero_power_card_id: "DS1h_292")
