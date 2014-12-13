@@ -4,18 +4,15 @@ require_relative "./game"
 module Hearthstone
   module Log
     class GameLogger
-      attr_reader :logfile, :parser
+      attr_reader :parser
+      attr_accessor :mode, :spectator_mode, :game, :delegate
 
-      attr_reader :games
-      attr_accessor :mode, :spectator_mode, :game
-
-      def initialize(parser=Parser.new)
-        @parser = parser
-
+      def initialize(delegate)
+        @delegate = delegate
+        @parser = Parser.new
+        @game = Game.new(self.mode)
         @mode = nil
         @spectator_mode = false 
-        @game = Game.new(self.mode)
-        @games = []
       end
 
       def parse(io)
@@ -77,8 +74,12 @@ module Hearthstone
       def on_game_over(name: name, state: state)
         self.game.results[name] = state
 
-        if self.game.results.size == 2
-          on_game_end_cleanup
+        if self.game.results.size == 2 && self.game.completed?
+          if delegate.respond_to?(:on_game_over)
+            delegate.on_game_over(self.game)
+          end
+
+          self.game = Game.new(self.mode)
         end
       end
 
@@ -93,11 +94,6 @@ module Hearthstone
 
       def on_event(event, data, line)
         self.game.current_turn.add_event(event, data, line)
-      end
-
-      def on_game_end_cleanup
-        self.games << self.game
-        self.game = Game.new(self.mode)
       end
     end
   end

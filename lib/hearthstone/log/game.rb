@@ -11,8 +11,8 @@ module Hearthstone
       def initialize(mode)
         @mode = mode
 
-        @players = []
         @results = {}
+        @players = []
         @turns = []
 
         add_turn(number: 0, player: nil, timestamp: nil)
@@ -54,7 +54,7 @@ module Hearthstone
       end
 
       def to_json
-        to_hash.to_json
+        JSON.pretty_generate(to_hash)
       end
     end
   end
