@@ -24,6 +24,7 @@ describe Hearthstone::Log::GameLogger do
         expect(siuying.first_player).to eq(true)
 
         expect(game.mode).to eq(:ranked)
+        expect(game.completed?).to eq(true)
         expect(game.turns.count).to eq(12)
         expect(game.turns.first.number).to eq(0)
         expect(game.turns.last.number).to eq(11)
@@ -40,6 +41,7 @@ describe Hearthstone::Log::GameLogger do
         expect(game.players.count).to eq(2)
 
         expect(game.mode).to eq(:ranked)
+        expect(game.completed?).to eq(true)
         expect(game.turns.count).to eq(25)
         expect(game.turns.first.number).to eq(0)
         expect(game.turns.last.number).to eq(24)

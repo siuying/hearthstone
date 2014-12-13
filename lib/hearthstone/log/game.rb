@@ -37,6 +37,10 @@ module Hearthstone
         player
       end
 
+      def completed?
+        self.results.count == 2
+      end
+
       def to_hash
         players_hash = players.collect(&:to_hash)
         turns_hash = turns.collect(&:to_hash)
