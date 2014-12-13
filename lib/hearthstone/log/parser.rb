@@ -79,7 +79,7 @@ module Hearthstone
           player = $8
           from_zone = $9
           to_zone = $10
-          return card_change(card_zone, from_zone, to_zone, card, card_id, player.to_i, id.to_i)
+          return parse_zone(card_zone, from_zone, to_zone, card, card_id, player.to_i, id.to_i)
 
         when /\[Zone\] ZoneChangeList\.ProcessChanges\(\) - id=(\d*) local=(.*) \[id=(\d*) cardId=(.*) type=(.*) zone=(.*) zonePos=(\d*) player=(\d*)\] zone from (.*) -> (.*)/
           zone_id = $1
@@ -88,11 +88,10 @@ module Hearthstone
           card_id = $4
           card_zone = $6
           zone_pos = $7
-          card_id = $8
-          player = $9
-          from_zone = $10
-          to_zone = $11
-          return card_change(card_zone, from_zone, to_zone, "", card_id, player.to_i, id.to_i)
+          player = $8
+          from_zone = $9
+          to_zone = $10
+          return parse_zone(card_zone, from_zone, to_zone, "", card_id, player.to_i, id.to_i)
 
         else
 
@@ -116,6 +115,8 @@ module Hearthstone
           end
         when "TURN"
           return [:turn, state.to_i]
+        else
+          raise "unknown entity: %s, %s, %s" % [type, player, state]
         end
       end
 
@@ -129,11 +130,139 @@ module Hearthstone
           return [:attacked, id: id, card_id: card_id, player: player]
         when "CARD_TARGET"
           return [:card_target, id: id, card_id: card_id, player: player, target: amount]
+        else
+          raise "unknown entity: %s, %s, %s, %s, %s" % [type, id, card_id, player, amount]
         end
       end
 
-      def parse_card_change(card_zone, from_zone, to_zone, card, card_id, player, id)
+      def parse_zone(card_zone, from_zone, to_zone, card, card_id, player, id)
+        if to_zone =~ /SECRET/ || from_zone =~ /SECRET/
+          return parse_zone_to_secret(card_zone, from_zone, to_zone, card, card_id, player, id)
+        end
+
+        if to_zone =~ /HAND/
+          return parse_zone_to_hand(card_zone, from_zone, to_zone, card, card_id, player, id)
+        end
+
+        if to_zone =~ /PLAY/
+          return parse_zone_to_play(card_zone, from_zone, to_zone, card, card_id, player, id)
+        end
+
+        if to_zone =~ /GRAVEYARD/
+          return parse_zone_to_graveyard(card_zone, from_zone, to_zone, card, card_id, player, id)
+        end
+
+        if to_zone =~ /DECK/
+          return parse_zone_to_deck(card_zone, from_zone, to_zone, card, card_id, player, id)
+        end
+
+        if to_zone == ""
+          return parse_zone_to_setaside(card_zone, from_zone, to_zone, card, card_id, player, id)
+        end
+
+        raise "unsupported play: %s, %s, %s, %s, %s, %s, %s" % [card_zone, from_zone, to_zone, card, card_id, player, id]
       end
+
+      def parse_zone_to_hand(card_zone, from_zone, to_zone, card, card_id, player, id)
+        if (from_zone == "OPPOSING DECK" && to_zone == "OPPOSING HAND") || (from_zone == "FRIENDLY DECK" && to_zone == "FRIENDLY HAND")
+          return [:card_drawn, player: player, id: id, card_id: card_id]
+        end
+
+        if (from_zone == "" && to_zone == "OPPOSING HAND") || (from_zone == "" && to_zone == "FRIENDLY HAND")
+          return [:card_received, player: player, id: id, card_id: card_id]
+        end
+
+        if (from_zone == "FRIENDLY PLAY" && to_zone == "FRIENDLY HAND") || (from_zone == "OPPOSING PLAY" && to_zone == "OPPOSING HAND")
+          return [:card_returned, player: player, id: id, card_id: card_id]
+        end
+
+        raise "unsupported hand: %s, %s, %s, %s, %s, %s, %s" % [card_zone, from_zone, to_zone, card, card_id, player, id]
+      end
+
+      def parse_zone_to_play(card_zone, from_zone, to_zone, card, card_id, player, id)
+        if (from_zone == "OPPOSING HAND" && to_zone == "OPPOSING PLAY") || (from_zone == "FRIENDLY HAND" && to_zone == "FRIENDLY PLAY")
+          return [:card_played, player: player, id: id, card_id: card_id]
+        end
+
+        if (from_zone == "OPPOSING DECK" && to_zone == "OPPOSING PLAY") || (from_zone == "FRIENDLY DECK" && to_zone == "FRIENDLY PLAY")
+          return [:card_played, player: player, id: id, card_id: card_id]
+        end
+
+        if from_zone == "" && to_zone =~ /PLAY \(Hero\)/
+          return [:hero, player: player, id: id, card_id: card_id]
+        end
+
+        if from_zone == "" && to_zone =~ /PLAY \(Hero Power\)/
+          return [:hero_power, player: player, id: id, card_id: card_id]
+        end
+
+        if from_zone == "" && to_zone =~ /PLAY/
+          return [:card_put_in_play, player: player, id: id, card_id: card_id]
+        end
+
+        raise "unsupported play: %s, %s, %s, %s, %s, %s, %s" % [card_zone, from_zone, to_zone, card, card_id, player, id]
+      end
+
+      def parse_zone_to_deck(card_zone, from_zone, to_zone, card, card_id, player, id)
+        if (from_zone == "FRIENDLY HAND" && to_zone == "FRIENDLY DECK") || (from_zone == "OPPOSING HAND" && to_zone == "OPPOSING DECK")
+          return [:card_reshuffled, player: player, id: id, card_id: card_id]
+        end
+
+        if from_zone == "" && (to_zone =~ /DECK/)
+          return [:card_added_to_deck, player: player, id: id, card_id: card_id]
+        end
+
+        raise "unsupported deck: %s, %s, %s, %s, %s, %s, %s" % [card_zone, from_zone, to_zone, card, card_id, player, id]
+      end
+      
+      def parse_zone_to_graveyard(card_zone, from_zone, to_zone, card, card_id, player, id)
+        if from_zone == "" || from_zone =~ /HAND/
+          return [:card_discarded, player: player, id: id, card_id: card_id]
+        end
+
+        if from_zone =~ /DECK/
+          return [:card_discarded_from_deck, player: player, id: id, card_id: card_id]
+        end
+
+        if from_zone =~ /PLAY \(Hero\)/
+          return [:hero_destroyed, player: player, id: id, card_id: card_id]
+        end
+
+        if from_zone =~ /PLAY/ || from_zone =~ /SECRET/ 
+          return [:card_destroyed, player: player, id: id, card_id: card_id]
+        end
+
+        raise "unsupported gy: %s, %s, %s, %s, %s, %s, %s" % [card_zone, from_zone, to_zone, card, card_id, player, id]
+      end
+
+      def parse_zone_to_secret(card_zone, from_zone, to_zone, card, card_id, player, id)
+        if (from_zone == "OPPOSING HAND" && to_zone == "OPPOSING SECRET") || (from_zone == "FRIENDLY HAND" && to_zone == "FRIENDLY SECRET")
+          return [:card_played, player: player, id: id, card_id: card_id]
+        end
+
+        if (from_zone == "OPPOSING DECK" && to_zone == "OPPOSING SECRET") || (from_zone == "FRIENDLY DECK" && to_zone == "FRIENDLY SECRET")
+          return [:card_put_in_play, player: player, id: id, card_id: card_id]
+        end
+
+        if from_zone =~ /SECRET/ && to_zone == ""
+          return [:card_revealed, player: player, id: id, card_id: card_id]
+        end
+
+        raise "unsupported secret: %s, %s, %s, %s, %s, %s, %s" % [card_zone, from_zone, to_zone, card, card_id, player, id]
+      end
+
+      def parse_zone_to_setaside(card_zone, from_zone, to_zone, card, card_id, player, id)
+        if from_zone =~ /PLAY/
+          return [:card_setaside, player: player, id: id, card_id: card_id]
+        end
+
+        if from_zone =~ /DECK/
+          return [:card_setaside, player: player, id: id, card_id: card_id]
+        end
+
+        raise "unsupported setaside: %s, %s, %s, %s, %s, %s, %s" % [card_zone, from_zone, to_zone, card, card_id, player, id]
+      end
+
     end
   end
 end
