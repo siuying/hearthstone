@@ -44,7 +44,7 @@ describe Hearthstone::Log::Parser, "#parse_line" do
     result = parser.parse_line("[LoadingScreen] LoadingScreen.OnSceneLoaded() - prevMode=HUB currMode=DRAFT")
     expect(result).to eq([:mode, :arena])
 
-    result = parser.parse_line("[Asset] CachedAsset.UnloadAssetObject() - unloading name=rank_window_expand family=Sound persistent=True")
+    result = parser.parse_line("[LoadingScreen] LoadingScreen.OnSceneLoaded() - prevMode=GAMEPLAY currMode=TOURNAMENT")
     expect(result).to eq([:mode, :ranked])
   end
 

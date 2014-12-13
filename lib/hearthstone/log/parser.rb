@@ -46,12 +46,14 @@ module Hearthstone
         when /\[Power\] .* End Spectator Mode/
           return [:end_spectator_mode]
 
-        when /\[LoadingScreen\] LoadingScreen.OnSceneLoaded\(\) - prevMode=.* currMode=DRAFT/
-          return [:mode, :arena]
-
-        when /.*name=rank_window.*/
-          return [:mode, :ranked]
-
+        when /\[LoadingScreen\] LoadingScreen.OnSceneLoaded\(\) - prevMode=.* currMode=(.*)/
+          mode = $1
+          case mode
+          when "DRAFT"
+            return [:mode, :arena]
+          when "TOURNAMENT"
+            return [:mode, :ranked]
+          end
         when /\[Bob\] legend rank (\d*)/
           rank = $1.to_i
           return [:legend, rank] if rank > 0
