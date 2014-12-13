@@ -169,16 +169,16 @@ module Hearthstone
           return parse_zone_to_hand(card_zone, from_zone, to_zone, card, card_id, player, id)
         end
 
-        if to_zone =~ /PLAY/
+        if to_zone =~ /DECK/
+          return parse_zone_to_deck(card_zone, from_zone, to_zone, card, card_id, player, id)
+        end
+
+        if to_zone =~ /PLAY/ || from_zone =~ /HAND/
           return parse_zone_to_play(card_zone, from_zone, to_zone, card, card_id, player, id)
         end
 
         if to_zone =~ /GRAVEYARD/
           return parse_zone_to_graveyard(card_zone, from_zone, to_zone, card, card_id, player, id)
-        end
-
-        if to_zone =~ /DECK/
-          return parse_zone_to_deck(card_zone, from_zone, to_zone, card, card_id, player, id)
         end
 
         if to_zone == ""
@@ -205,6 +205,10 @@ module Hearthstone
       end
 
       def parse_zone_to_play(card_zone, from_zone, to_zone, card, card_id, player, id)
+        if (from_zone == "OPPOSING HAND" && to_zone == "") || (from_zone == "FRIENDLY HAND" && to_zone == "")
+          return [:card_played, player: player, id: id, card_id: card_id]
+        end
+
         if (from_zone == "OPPOSING HAND" && to_zone == "OPPOSING PLAY") || (from_zone == "FRIENDLY HAND" && to_zone == "FRIENDLY PLAY")
           return [:card_played, player: player, id: id, card_id: card_id]
         end
