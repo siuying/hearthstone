@@ -9,7 +9,7 @@ describe Hearthstone::Log::Parser, "#parse_line" do
 
   it "returns game modes" do
     result = parser.parse_line("[Bob] ---RegisterScreenTourneys---")
-    expect(result).to eq([:mode, :casual])
+    expect(result).to eq([:mode, :play])
 
     result = parser.parse_line("[Bob] ---RegisterScreenForge---")
     expect(result).to eq([:mode, :arena])
