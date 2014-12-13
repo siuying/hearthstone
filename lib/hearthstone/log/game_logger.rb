@@ -5,16 +5,14 @@ module Hearthstone
   module Log
     class GameLogger
       attr_reader :parser, :debug
-      attr_accessor :mode, :spectator_mode, :game, :delegate
+      attr_accessor :game, :delegate, :mode
 
       def initialize(delegate, debug: debug=false)
         @delegate = delegate
         @parser = Parser.new
-        @game = Game.new(self.mode)
-
+        @game = Game.new(nil)
         @debug = debug
         @mode = nil
-        @spectator_mode = false 
       end
 
       def log_file(io)
@@ -58,6 +56,8 @@ module Hearthstone
           on_set_hero(data)
         when :set_hero_power
           on_set_hero_power(data)
+        when :hero_destroyed
+          on_hero_destroyed(data)
         else
           if event
             on_event(event, data, line)
@@ -66,7 +66,8 @@ module Hearthstone
       end
 
       def on_game_mode(mode)
-        self.game.mode = mode
+        self.mode = mode
+        self.game = Game.new(mode)
 
         if delegate.respond_to?(:on_game_mode)
           delegate.on_game_mode(mode)
@@ -94,13 +95,16 @@ module Hearthstone
       def on_game_over(name: name, state: state)
         self.game.results[name] = state
 
-        if self.game.results.size == 2 && self.game.completed?
-          if delegate.respond_to?(:on_game_over)
+        if delegate.respond_to?(:on_game_over)
+          if self.game.completed? && self.game.results.count == 2
             delegate.on_game_over(self.game)
           end
-
-          self.game = Game.new(self.mode)
         end
+      end
+
+      def on_hero_destroyed(player: player, id: id, card_id: card_id)
+        # when hero destroyed, the game is ended, we should proceed to next game
+        self.game = Game.new(self.mode)
       end
 
       def on_turn_start(name: name, timestamp: timestamp)

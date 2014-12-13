@@ -61,7 +61,7 @@ class RecorderCommand < CLAide::Command
   # when game over, write the logs to output folder
   def on_game_over(game)
     json = game.to_json
-    filename = filename_with_game(game)
+    filename = game.filename + ".json"
 
     puts "Game recorded: #{game.players.first.name} vs #{game.players.last.name}"
     File.open(File.join(self.output, filename), "w") do |f|
@@ -73,12 +73,7 @@ class RecorderCommand < CLAide::Command
     puts "Game mode detected: #{mode}"
   end
 
-  private
-
-  def filename_with_game(game)
-    timestamp = game.turns.detect {|t| t.timestamp != nil }.timestamp.to_s rescue "0"
-    player1 = game.players.first.name
-    player2 = game.players.last.name
-    return "hs_#{timestamp}_#{player1}_vs_#{player2}.json"
+  def on_event(event, data)
+    puts "event: #{event.to_s} -> #{data}"
   end
 end
