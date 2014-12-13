@@ -1,6 +1,6 @@
 # Hearthstone
 
-TODO: Write a gem description
+Utlities for Hearthstone.
 
 ## Installation
 
@@ -20,7 +20,11 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+To record a game, run following command:
+
+    $ hearthstone-recorder
+
+Start hearthstone, any games will be saved to ~/Documents/hearthstone-recorder/
 
 ## Contributing
 

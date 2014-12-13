@@ -7,7 +7,7 @@ require 'file/tail'
 require_relative '../log'
 
 class RecorderCommand < CLAide::Command
-  attr_reader :input, :output, :complete
+  attr_reader :input, :output, :config, :complete
 
   self.description = 'Record hearthstone games.'
   self.command = 'hearthstone-recorder'
@@ -16,6 +16,7 @@ class RecorderCommand < CLAide::Command
   def self.options
     [
       ['--input-path', 'File path of the Hearthstone log files.'],
+      ['--config-path', 'Hearthstone config file path. (Default: ~/Library/Preferences/Blizzard/Hearthstone/log.config)'],
       ['--output-path', 'File path of the output record files. (Default: ~/Documents/hearthstone-recorder)'],
       ['--complete', 'Read the log file completely and re-create every games. Default: only watch for new games.']
     ].concat(super)
@@ -24,17 +25,23 @@ class RecorderCommand < CLAide::Command
   def initialize(argv)
     @input = argv.option('input-path', "#{Dir.home}/Library/Logs/Unity/Player.log")
     @output = argv.option('output-path', "#{Dir.home}/Documents/hearthstone-recorder")
+    @config = argv.option('config-path', "#{Dir.home}/Library/Preferences/Blizzard/Hearthstone/log.config")
     @complete = argv.flag?('complete', false)
-
-    unless Dir.exists? @output
-      Dir.mkdir(@output)
-    end
-
     super
   end
 
   def validate!
     super
+
+    unless Dir.exists? self.output
+      Dir.mkdir(self.output)
+    end
+
+    configurator = Hearthstone::Log::Configurator.new(self.config)
+    if configurator.needs_config?
+      puts "Configure Hearthstone, if hearthstone is running, please restart it. (#{self.config})"
+      configurator.configure
+    end
   end
 
   def run

@@ -22,13 +22,14 @@ LogLevel=1
 FilePrinting=false
 ConsolePrinting=true
 ScreenPrinting=false
+
 [Power]
 LogLevel=1
 ConsolePrinting=true
 """
         mode = "w"
         if File.exists?(path)
-          mode = "w+"
+          mode = "a"
         end
 
         File.open(path, mode) do |f|
