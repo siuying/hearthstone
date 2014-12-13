@@ -37,14 +37,6 @@ describe Hearthstone::Log::Parser, "#parse_line" do
     expect(result).to eq([:mode, :solo])
   end
 
-  it "returns legend rank" do
-    result = parser.parse_line("[Bob] legend rank 10")
-    expect(result).to eq([:legend, 10])
-
-    result = parser.parse_line("[Bob] legend rank 0")
-    expect(result).to be_nil
-  end
-
   it "returns action start" do
     result = parser.parse_line("[Power] GameState.DebugPrintPower() - ACTION_START Entity=[name=Undertaker id=59 zone=PLAY zonePos=1 cardId=FP1_028 player=2] SubType=ATTACK Index=-1 Target=[name=Rexxar id=4 zone=PLAY zonePos=0 cardId=HERO_05 player=1]")
     expect(result).to eq([:action_start,  {:subtype=>"ATTACK", :from=>{:id=>59, :card_id=>"FP1_028", :player=>2}, :to=>{:id=>4, :card_id=>"HERO_05", :player=>1}}])

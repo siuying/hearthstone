@@ -28,9 +28,6 @@ module Hearthstone
           when "ADVENTURE"
             return [:mode, :solo]
           end
-        when /\[Bob\] legend rank (\d*)/
-          rank = $1.to_i
-          return [:legend, rank] if rank > 0
 
         when /\[Power\] GameState.DebugPrintPower\(\) -\s*FULL_ENTITY.*Creating ID=(\d*) CardID=(?!GAME)(?!HERO)(.+)/
           id = $1.to_i

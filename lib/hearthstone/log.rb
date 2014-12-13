@@ -4,3 +4,4 @@ module Hearthstone
 end
 
 require_relative "./log/game_logger"
+require_relative "./log/configurator"
