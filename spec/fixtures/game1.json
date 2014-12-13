@@ -1,0 +1,2118 @@
+{
+  "mode": "ranked",
+  "players": [
+    {
+      "id": 2,
+      "name": "siuying",
+      "first_player": true,
+      "hero": {
+        "id": 36,
+        "card_id": "HERO_05"
+      },
+      "hero_power": {
+        "id": 37,
+        "card_id": "DS1h_292"
+      }
+    },
+    {
+      "id": 1,
+      "name": "화이트베리",
+      "first_player": false,
+      "hero": {
+        "id": 4,
+        "card_id": "HERO_04"
+      },
+      "hero_power": {
+        "id": 5,
+        "card_id": "CS2_101"
+      }
+    }
+  ],
+  "turns": [
+    {
+      "number": 0,
+      "player": null,
+      "timestamp": null,
+      "events": [
+        [
+          "open_card",
+          {
+            "id": 5,
+            "card_id": "CS2_101"
+          }
+        ],
+        [
+          "open_card",
+          {
+            "id": 37,
+            "card_id": "DS1h_292"
+          }
+        ],
+        [
+          "open_card",
+          {
+            "id": 51,
+            "card_id": "EX1_610"
+          }
+        ],
+        [
+          "open_card",
+          {
+            "id": 58,
+            "card_id": "EX1_556"
+          }
+        ],
+        [
+          "open_card",
+          {
+            "id": 65,
+            "card_id": "EX1_556"
+          }
+        ]
+      ]
+    },
+    {
+      "number": 1,
+      "player": "siuying",
+      "timestamp": 1418478527,
+      "events": [
+        [
+          "card_received",
+          {
+            "player": 1,
+            "id": 6,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 1,
+            "id": 7,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 1,
+            "id": 8,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 1,
+            "id": 9,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 1,
+            "id": 10,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_received",
+          {
+            "player": 1,
+            "id": 11,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 1,
+            "id": 12,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 1,
+            "id": 13,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 1,
+            "id": 14,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_received",
+          {
+            "player": 1,
+            "id": 15,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 1,
+            "id": 16,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 1,
+            "id": 17,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_received",
+          {
+            "player": 1,
+            "id": 18,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 1,
+            "id": 19,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 1,
+            "id": 20,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 1,
+            "id": 21,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 1,
+            "id": 22,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 1,
+            "id": 23,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 1,
+            "id": 24,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 1,
+            "id": 25,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 1,
+            "id": 26,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 1,
+            "id": 27,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 1,
+            "id": 28,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 1,
+            "id": 29,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 1,
+            "id": 30,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 1,
+            "id": 31,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 1,
+            "id": 32,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 1,
+            "id": 33,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 1,
+            "id": 34,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 1,
+            "id": 35,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 2,
+            "id": 38,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 2,
+            "id": 39,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 2,
+            "id": 40,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 2,
+            "id": 41,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 2,
+            "id": 42,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 2,
+            "id": 43,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 2,
+            "id": 44,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 2,
+            "id": 45,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 2,
+            "id": 46,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 2,
+            "id": 47,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 2,
+            "id": 48,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 2,
+            "id": 49,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 2,
+            "id": 50,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_received",
+          {
+            "player": 2,
+            "id": 51,
+            "card_id": "EX1_610"
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 2,
+            "id": 52,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 2,
+            "id": 53,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 2,
+            "id": 54,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 2,
+            "id": 55,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 2,
+            "id": 56,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 2,
+            "id": 57,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_received",
+          {
+            "player": 2,
+            "id": 58,
+            "card_id": "EX1_556"
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 2,
+            "id": 59,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 2,
+            "id": 60,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 2,
+            "id": 61,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 2,
+            "id": 62,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 2,
+            "id": 63,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 2,
+            "id": 64,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_received",
+          {
+            "player": 2,
+            "id": 65,
+            "card_id": "EX1_556"
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 2,
+            "id": 66,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_added_to_deck",
+          {
+            "player": 2,
+            "id": 67,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_received",
+          {
+            "player": 1,
+            "id": 68,
+            "card_id": ""
+          }
+        ],
+        [
+          "choice_type",
+          "MULLIGAN"
+        ],
+        [
+          "choose",
+          {
+            "id": 58,
+            "card_id": "EX1_556",
+            "player": 2
+          }
+        ],
+        [
+          "card_drawn",
+          {
+            "player": 2,
+            "id": 44,
+            "card_id": "FP1_031"
+          }
+        ],
+        [
+          "card_reshuffled",
+          {
+            "player": 2,
+            "id": 65,
+            "card_id": "EX1_556"
+          }
+        ],
+        [
+          "card_drawn",
+          {
+            "player": 2,
+            "id": 40,
+            "card_id": "GVG_096"
+          }
+        ],
+        [
+          "card_reshuffled",
+          {
+            "player": 2,
+            "id": 51,
+            "card_id": "EX1_610"
+          }
+        ],
+        [
+          "card_drawn",
+          {
+            "player": 1,
+            "id": 25,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_reshuffled",
+          {
+            "player": 1,
+            "id": 15,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_drawn",
+          {
+            "player": 2,
+            "id": 57,
+            "card_id": "FP1_028"
+          }
+        ],
+        [
+          "card_played",
+          {
+            "player": 2,
+            "id": 57,
+            "card_id": "FP1_028"
+          }
+        ]
+      ]
+    },
+    {
+      "number": 2,
+      "player": "화이트베리",
+      "timestamp": 1418478535,
+      "events": [
+        [
+          "card_drawn",
+          {
+            "player": 1,
+            "id": 34,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_played",
+          {
+            "player": 1,
+            "id": 34,
+            "card_id": ""
+          }
+        ]
+      ]
+    },
+    {
+      "number": 3,
+      "player": "siuying",
+      "timestamp": 1418478546,
+      "events": [
+        [
+          "card_drawn",
+          {
+            "player": 2,
+            "id": 38,
+            "card_id": "EX1_096"
+          }
+        ],
+        [
+          "card_played",
+          {
+            "player": 2,
+            "id": 38,
+            "card_id": "EX1_096"
+          }
+        ],
+        [
+          "open_card",
+          {
+            "id": 69,
+            "card_id": "FP1_028e"
+          }
+        ],
+        [
+          "attached",
+          {
+            "card_id": 69,
+            "target": 57
+          }
+        ],
+        [
+          "action_start",
+          {
+            "subtype": "ATTACK",
+            "from": {
+              "id": 57,
+              "card_id": "FP1_028",
+              "player": 2
+            },
+            "to": {
+              "id": 4,
+              "card_id": "HERO_04",
+              "player": 1
+            }
+          }
+        ],
+        [
+          "damaged",
+          {
+            "id": 4,
+            "card_id": "HERO_04",
+            "player": 1,
+            "amount": 2
+          }
+        ]
+      ]
+    },
+    {
+      "number": 4,
+      "player": "화이트베리",
+      "timestamp": 1418478578,
+      "events": [
+        [
+          "card_drawn",
+          {
+            "player": 1,
+            "id": 23,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_target",
+          {
+            "id": 6,
+            "card_id": "",
+            "player": 1,
+            "target": 57
+          }
+        ],
+        [
+          "card_played",
+          {
+            "player": 1,
+            "id": 6,
+            "card_id": "CS2_203"
+          }
+        ]
+      ]
+    },
+    {
+      "number": 5,
+      "player": "siuying",
+      "timestamp": 1418478592,
+      "events": [
+        [
+          "card_drawn",
+          {
+            "player": 2,
+            "id": 39,
+            "card_id": "FP1_013"
+          }
+        ],
+        [
+          "card_played",
+          {
+            "player": 2,
+            "id": 58,
+            "card_id": "EX1_556"
+          }
+        ],
+        [
+          "action_start",
+          {
+            "subtype": "ATTACK",
+            "from": {
+              "id": 57,
+              "card_id": "FP1_028",
+              "player": 2
+            },
+            "to": {
+              "id": 6,
+              "card_id": "CS2_203",
+              "player": 1
+            }
+          }
+        ],
+        [
+          "damaged",
+          {
+            "id": 6,
+            "card_id": "CS2_203",
+            "player": 1,
+            "amount": 1
+          }
+        ],
+        [
+          "damaged",
+          {
+            "id": 57,
+            "card_id": "FP1_028",
+            "player": 2,
+            "amount": 2
+          }
+        ],
+        [
+          "card_destroyed",
+          {
+            "player": 2,
+            "id": 57,
+            "card_id": "FP1_028"
+          }
+        ],
+        [
+          "card_destroyed",
+          {
+            "player": 1,
+            "id": 6,
+            "card_id": "CS2_203"
+          }
+        ],
+        [
+          "action_start",
+          {
+            "subtype": "ATTACK",
+            "from": {
+              "id": 38,
+              "card_id": "EX1_096",
+              "player": 2
+            },
+            "to": {
+              "id": 4,
+              "card_id": "HERO_04",
+              "player": 1
+            }
+          }
+        ],
+        [
+          "damaged",
+          {
+            "id": 4,
+            "card_id": "HERO_04",
+            "player": 1,
+            "amount": 4
+          }
+        ]
+      ]
+    },
+    {
+      "number": 6,
+      "player": "화이트베리",
+      "timestamp": 1418478602,
+      "events": [
+        [
+          "card_drawn",
+          {
+            "player": 1,
+            "id": 28,
+            "card_id": ""
+          }
+        ],
+        [
+          "open_card",
+          {
+            "id": 70,
+            "card_id": "CS2_101t"
+          }
+        ],
+        [
+          "card_put_in_play",
+          {
+            "player": 1,
+            "id": 70,
+            "card_id": "CS2_101t"
+          }
+        ],
+        [
+          "card_played",
+          {
+            "player": 1,
+            "id": 68,
+            "card_id": "GAME_005"
+          }
+        ],
+        [
+          "card_target",
+          {
+            "id": 11,
+            "card_id": "",
+            "player": 1,
+            "target": 70
+          }
+        ],
+        [
+          "card_discarded",
+          {
+            "player": 1,
+            "id": 68,
+            "card_id": "GAME_005"
+          }
+        ]
+      ]
+    },
+    {
+      "number": 7,
+      "player": "siuying",
+      "timestamp": 1418478616,
+      "events": [
+        [
+          "card_played",
+          {
+            "player": 1,
+            "id": 11,
+            "card_id": "EX1_362"
+          }
+        ],
+        [
+          "card_drawn",
+          {
+            "player": 2,
+            "id": 48,
+            "card_id": "GVG_113"
+          }
+        ],
+        [
+          "card_played",
+          {
+            "player": 2,
+            "id": 44,
+            "card_id": "FP1_031"
+          }
+        ],
+        [
+          "action_start",
+          {
+            "subtype": "ATTACK",
+            "from": {
+              "id": 38,
+              "card_id": "EX1_096",
+              "player": 2
+            },
+            "to": {
+              "id": 11,
+              "card_id": "EX1_362",
+              "player": 1
+            }
+          }
+        ],
+        [
+          "damaged",
+          {
+            "id": 11,
+            "card_id": "EX1_362",
+            "player": 1,
+            "amount": 2
+          }
+        ],
+        [
+          "damaged",
+          {
+            "id": 38,
+            "card_id": "EX1_096",
+            "player": 2,
+            "amount": 2
+          }
+        ],
+        [
+          "card_destroyed",
+          {
+            "player": 2,
+            "id": 38,
+            "card_id": "EX1_096"
+          }
+        ],
+        [
+          "card_destroyed",
+          {
+            "player": 1,
+            "id": 11,
+            "card_id": "EX1_362"
+          }
+        ],
+        [
+          "card_drawn",
+          {
+            "player": 2,
+            "id": 49,
+            "card_id": "EX1_534"
+          }
+        ],
+        [
+          "card_drawn",
+          {
+            "player": 2,
+            "id": 42,
+            "card_id": "EX1_110"
+          }
+        ],
+        [
+          "card_revealed",
+          {
+            "player": 1,
+            "id": 34,
+            "card_id": "FP1_020"
+          }
+        ],
+        [
+          "action_start",
+          {
+            "subtype": "ATTACK",
+            "from": {
+              "id": 58,
+              "card_id": "EX1_556",
+              "player": 2
+            },
+            "to": {
+              "id": 70,
+              "card_id": "CS2_101t",
+              "player": 1
+            }
+          }
+        ],
+        [
+          "damaged",
+          {
+            "id": 58,
+            "card_id": "EX1_556",
+            "player": 2,
+            "amount": 4
+          }
+        ],
+        [
+          "open_card",
+          {
+            "id": 72,
+            "card_id": "skele21"
+          }
+        ],
+        [
+          "open_card",
+          {
+            "id": 73,
+            "card_id": "skele21"
+          }
+        ],
+        [
+          "card_destroyed",
+          {
+            "player": 2,
+            "id": 58,
+            "card_id": "EX1_556"
+          }
+        ],
+        [
+          "card_put_in_play",
+          {
+            "player": 2,
+            "id": 72,
+            "card_id": "skele21"
+          }
+        ],
+        [
+          "card_put_in_play",
+          {
+            "player": 2,
+            "id": 73,
+            "card_id": "skele21"
+          }
+        ]
+      ]
+    },
+    {
+      "number": 8,
+      "player": "화이트베리",
+      "timestamp": 1418478642,
+      "events": [
+        [
+          "card_drawn",
+          {
+            "player": 1,
+            "id": 26,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_target",
+          {
+            "id": 25,
+            "card_id": "",
+            "player": 1,
+            "target": 70
+          }
+        ],
+        [
+          "card_played",
+          {
+            "player": 1,
+            "id": 25,
+            "card_id": "CS2_092"
+          }
+        ],
+        [
+          "action_start",
+          {
+            "subtype": "ATTACK",
+            "from": {
+              "id": 70,
+              "card_id": "CS2_101t",
+              "player": 1
+            },
+            "to": {
+              "id": 44,
+              "card_id": "FP1_031",
+              "player": 2
+            }
+          }
+        ],
+        [
+          "damaged",
+          {
+            "id": 44,
+            "card_id": "FP1_031",
+            "player": 2,
+            "amount": 8
+          }
+        ],
+        [
+          "damaged",
+          {
+            "id": 70,
+            "card_id": "CS2_101t",
+            "player": 1,
+            "amount": 1
+          }
+        ],
+        [
+          "card_discarded",
+          {
+            "player": 1,
+            "id": 25,
+            "card_id": "CS2_092"
+          }
+        ]
+      ]
+    },
+    {
+      "number": 9,
+      "player": "siuying",
+      "timestamp": 1418478652,
+      "events": [
+        [
+          "card_destroyed",
+          {
+            "player": 2,
+            "id": 44,
+            "card_id": "FP1_031"
+          }
+        ],
+        [
+          "card_drawn",
+          {
+            "player": 2,
+            "id": 63,
+            "card_id": "FP1_011"
+          }
+        ],
+        [
+          "card_played",
+          {
+            "player": 2,
+            "id": 63,
+            "card_id": "FP1_011"
+          }
+        ],
+        [
+          "card_played",
+          {
+            "player": 2,
+            "id": 40,
+            "card_id": "GVG_096"
+          }
+        ],
+        [
+          "action_start",
+          {
+            "subtype": "ATTACK",
+            "from": {
+              "id": 73,
+              "card_id": "skele21",
+              "player": 2
+            },
+            "to": {
+              "id": 4,
+              "card_id": "HERO_04",
+              "player": 1
+            }
+          }
+        ],
+        [
+          "damaged",
+          {
+            "id": 4,
+            "card_id": "HERO_04",
+            "player": 1,
+            "amount": 6
+          }
+        ],
+        [
+          "action_start",
+          {
+            "subtype": "ATTACK",
+            "from": {
+              "id": 72,
+              "card_id": "skele21",
+              "player": 2
+            },
+            "to": {
+              "id": 4,
+              "card_id": "HERO_04",
+              "player": 1
+            }
+          }
+        ],
+        [
+          "damaged",
+          {
+            "id": 4,
+            "card_id": "HERO_04",
+            "player": 1,
+            "amount": 8
+          }
+        ]
+      ]
+    },
+    {
+      "number": 10,
+      "player": "화이트베리",
+      "timestamp": 1418478665,
+      "events": [
+        [
+          "card_drawn",
+          {
+            "player": 1,
+            "id": 22,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_played",
+          {
+            "player": 1,
+            "id": 18,
+            "card_id": "GVG_096"
+          }
+        ],
+        [
+          "action_start",
+          {
+            "subtype": "ATTACK",
+            "from": {
+              "id": 70,
+              "card_id": "CS2_101t",
+              "player": 1
+            },
+            "to": {
+              "id": 36,
+              "card_id": "HERO_05",
+              "player": 2
+            }
+          }
+        ],
+        [
+          "damaged",
+          {
+            "id": 36,
+            "card_id": "HERO_05",
+            "player": 2,
+            "amount": 8
+          }
+        ]
+      ]
+    },
+    {
+      "number": 11,
+      "player": "siuying",
+      "timestamp": 1418478692,
+      "events": [
+        [
+          "card_drawn",
+          {
+            "player": 2,
+            "id": 61,
+            "card_id": "EX1_016"
+          }
+        ],
+        [
+          "card_played",
+          {
+            "player": 2,
+            "id": 61,
+            "card_id": "EX1_016"
+          }
+        ],
+        [
+          "action_start",
+          {
+            "subtype": "ATTACK",
+            "from": {
+              "id": 73,
+              "card_id": "skele21",
+              "player": 2
+            },
+            "to": {
+              "id": 18,
+              "card_id": "GVG_096",
+              "player": 1
+            }
+          }
+        ],
+        [
+          "damaged",
+          {
+            "id": 18,
+            "card_id": "GVG_096",
+            "player": 1,
+            "amount": 2
+          }
+        ],
+        [
+          "damaged",
+          {
+            "id": 73,
+            "card_id": "skele21",
+            "player": 2,
+            "amount": 4
+          }
+        ],
+        [
+          "action_start",
+          {
+            "subtype": "ATTACK",
+            "from": {
+              "id": 72,
+              "card_id": "skele21",
+              "player": 2
+            },
+            "to": {
+              "id": 18,
+              "card_id": "GVG_096",
+              "player": 1
+            }
+          }
+        ],
+        [
+          "damaged",
+          {
+            "id": 18,
+            "card_id": "GVG_096",
+            "player": 1,
+            "amount": 4
+          }
+        ],
+        [
+          "damaged",
+          {
+            "id": 72,
+            "card_id": "skele21",
+            "player": 2,
+            "amount": 4
+          }
+        ],
+        [
+          "open_card",
+          {
+            "id": 75,
+            "card_id": "GVG_072"
+          }
+        ],
+        [
+          "card_destroyed",
+          {
+            "player": 2,
+            "id": 73,
+            "card_id": "skele21"
+          }
+        ],
+        [
+          "card_destroyed",
+          {
+            "player": 2,
+            "id": 72,
+            "card_id": "skele21"
+          }
+        ],
+        [
+          "card_destroyed",
+          {
+            "player": 1,
+            "id": 18,
+            "card_id": "GVG_096"
+          }
+        ],
+        [
+          "card_put_in_play",
+          {
+            "player": 1,
+            "id": 75,
+            "card_id": "GVG_072"
+          }
+        ],
+        [
+          "action_start",
+          {
+            "subtype": "ATTACK",
+            "from": {
+              "id": 63,
+              "card_id": "FP1_011",
+              "player": 2
+            },
+            "to": {
+              "id": 4,
+              "card_id": "HERO_04",
+              "player": 1
+            }
+          }
+        ],
+        [
+          "damaged",
+          {
+            "id": 4,
+            "card_id": "HERO_04",
+            "player": 1,
+            "amount": 9
+          }
+        ],
+        [
+          "action_start",
+          {
+            "subtype": "ATTACK",
+            "from": {
+              "id": 40,
+              "card_id": "GVG_096",
+              "player": 2
+            },
+            "to": {
+              "id": 75,
+              "card_id": "GVG_072",
+              "player": 1
+            }
+          }
+        ],
+        [
+          "damaged",
+          {
+            "id": 75,
+            "card_id": "GVG_072",
+            "player": 1,
+            "amount": 4
+          }
+        ],
+        [
+          "damaged",
+          {
+            "id": 40,
+            "card_id": "GVG_096",
+            "player": 2,
+            "amount": 2
+          }
+        ],
+        [
+          "card_destroyed",
+          {
+            "player": 1,
+            "id": 75,
+            "card_id": "GVG_072"
+          }
+        ]
+      ]
+    },
+    {
+      "number": 12,
+      "player": "화이트베리",
+      "timestamp": 1418478714,
+      "events": [
+        [
+          "card_drawn",
+          {
+            "player": 1,
+            "id": 30,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_played",
+          {
+            "player": 1,
+            "id": 28,
+            "card_id": "GVG_107"
+          }
+        ],
+        [
+          "open_card",
+          {
+            "id": 76,
+            "card_id": "CS2_101t"
+          }
+        ],
+        [
+          "card_put_in_play",
+          {
+            "player": 1,
+            "id": 76,
+            "card_id": "CS2_101t"
+          }
+        ],
+        [
+          "action_start",
+          {
+            "subtype": "ATTACK",
+            "from": {
+              "id": 70,
+              "card_id": "CS2_101t",
+              "player": 1
+            },
+            "to": {
+              "id": 36,
+              "card_id": "HERO_05",
+              "player": 2
+            }
+          }
+        ],
+        [
+          "damaged",
+          {
+            "id": 36,
+            "card_id": "HERO_05",
+            "player": 2,
+            "amount": 16
+          }
+        ]
+      ]
+    },
+    {
+      "number": 13,
+      "player": "siuying",
+      "timestamp": 1418478769,
+      "events": [
+        [
+          "card_drawn",
+          {
+            "player": 2,
+            "id": 67,
+            "card_id": "FP1_004"
+          }
+        ],
+        [
+          "card_played",
+          {
+            "player": 2,
+            "id": 42,
+            "card_id": "EX1_110"
+          }
+        ],
+        [
+          "action_start",
+          {
+            "subtype": "ATTACK",
+            "from": {
+              "id": 61,
+              "card_id": "EX1_016",
+              "player": 2
+            },
+            "to": {
+              "id": 70,
+              "card_id": "CS2_101t",
+              "player": 1
+            }
+          }
+        ],
+        [
+          "damaged",
+          {
+            "id": 70,
+            "card_id": "CS2_101t",
+            "player": 1,
+            "amount": 6
+          }
+        ],
+        [
+          "damaged",
+          {
+            "id": 61,
+            "card_id": "EX1_016",
+            "player": 2,
+            "amount": 8
+          }
+        ],
+        [
+          "card_destroyed",
+          {
+            "player": 2,
+            "id": 61,
+            "card_id": "EX1_016"
+          }
+        ],
+        [
+          "action_start",
+          {
+            "subtype": "ATTACK",
+            "from": {
+              "id": 63,
+              "card_id": "FP1_011",
+              "player": 2
+            },
+            "to": {
+              "id": 70,
+              "card_id": "CS2_101t",
+              "player": 1
+            }
+          }
+        ],
+        [
+          "damaged",
+          {
+            "id": 70,
+            "card_id": "CS2_101t",
+            "player": 1,
+            "amount": 7
+          }
+        ],
+        [
+          "damaged",
+          {
+            "id": 63,
+            "card_id": "FP1_011",
+            "player": 2,
+            "amount": 8
+          }
+        ],
+        [
+          "open_card",
+          {
+            "id": 77,
+            "card_id": "DS1_175"
+          }
+        ],
+        [
+          "card_destroyed",
+          {
+            "player": 1,
+            "id": 70,
+            "card_id": "CS2_101t"
+          }
+        ],
+        [
+          "card_destroyed",
+          {
+            "player": 2,
+            "id": 63,
+            "card_id": "FP1_011"
+          }
+        ],
+        [
+          "card_received",
+          {
+            "player": 2,
+            "id": 77,
+            "card_id": "DS1_175"
+          }
+        ],
+        [
+          "card_played",
+          {
+            "player": 2,
+            "id": 77,
+            "card_id": "DS1_175"
+          }
+        ],
+        [
+          "action_start",
+          {
+            "subtype": "ATTACK",
+            "from": {
+              "id": 40,
+              "card_id": "GVG_096",
+              "player": 2
+            },
+            "to": {
+              "id": 76,
+              "card_id": "CS2_101t",
+              "player": 1
+            }
+          }
+        ],
+        [
+          "damaged",
+          {
+            "id": 76,
+            "card_id": "CS2_101t",
+            "player": 1,
+            "amount": 4
+          }
+        ],
+        [
+          "damaged",
+          {
+            "id": 40,
+            "card_id": "GVG_096",
+            "player": 2,
+            "amount": 3
+          }
+        ],
+        [
+          "open_card",
+          {
+            "id": 78,
+            "card_id": "GVG_103"
+          }
+        ],
+        [
+          "card_destroyed",
+          {
+            "player": 2,
+            "id": 40,
+            "card_id": "GVG_096"
+          }
+        ],
+        [
+          "card_destroyed",
+          {
+            "player": 1,
+            "id": 76,
+            "card_id": "CS2_101t"
+          }
+        ],
+        [
+          "card_put_in_play",
+          {
+            "player": 2,
+            "id": 78,
+            "card_id": "GVG_103"
+          }
+        ]
+      ]
+    },
+    {
+      "number": 14,
+      "player": "화이트베리",
+      "timestamp": 1418478793,
+      "events": [
+        [
+          "open_card",
+          {
+            "id": 79,
+            "card_id": "GVG_076a"
+          }
+        ],
+        [
+          "attached",
+          {
+            "card_id": 79,
+            "target": 78
+          }
+        ],
+        [
+          "card_drawn",
+          {
+            "player": 1,
+            "id": 14,
+            "card_id": ""
+          }
+        ],
+        [
+          "card_played",
+          {
+            "player": 1,
+            "id": 22,
+            "card_id": "EX1_619"
+          }
+        ],
+        [
+          "card_discarded",
+          {
+            "player": 1,
+            "id": 22,
+            "card_id": "EX1_619"
+          }
+        ],
+        [
+          "card_target",
+          {
+            "id": 14,
+            "card_id": "",
+            "player": 1,
+            "target": 42
+          }
+        ],
+        [
+          "card_played",
+          {
+            "player": 1,
+            "id": 14,
+            "card_id": "EX1_382"
+          }
+        ],
+        [
+          "open_card",
+          {
+            "id": 84,
+            "card_id": "CS2_101t"
+          }
+        ],
+        [
+          "card_put_in_play",
+          {
+            "player": 1,
+            "id": 84,
+            "card_id": "CS2_101t"
+          }
+        ]
+      ]
+    },
+    {
+      "number": 15,
+      "player": "siuying",
+      "timestamp": 1418478821,
+      "events": [
+        [
+          "card_drawn",
+          {
+            "player": 2,
+            "id": 54,
+            "card_id": "FP1_011"
+          }
+        ],
+        [
+          "card_played",
+          {
+            "player": 2,
+            "id": 39,
+            "card_id": "FP1_013"
+          }
+        ],
+        [
+          "action_start",
+          {
+            "subtype": "ATTACK",
+            "from": {
+              "id": 42,
+              "card_id": "EX1_110",
+              "player": 2
+            },
+            "to": {
+              "id": 14,
+              "card_id": "EX1_382",
+              "player": 1
+            }
+          }
+        ],
+        [
+          "damaged",
+          {
+            "id": 14,
+            "card_id": "EX1_382",
+            "player": 1,
+            "amount": 1
+          }
+        ],
+        [
+          "damaged",
+          {
+            "id": 42,
+            "card_id": "EX1_110",
+            "player": 2,
+            "amount": 3
+          }
+        ],
+        [
+          "open_card",
+          {
+            "id": 85,
+            "card_id": "EX1_110t"
+          }
+        ],
+        [
+          "card_destroyed",
+          {
+            "player": 2,
+            "id": 42,
+            "card_id": "EX1_110"
+          }
+        ],
+        [
+          "card_put_in_play",
+          {
+            "player": 2,
+            "id": 85,
+            "card_id": "EX1_110t"
+          }
+        ],
+        [
+          "action_start",
+          {
+            "subtype": "ATTACK",
+            "from": {
+              "id": 78,
+              "card_id": "GVG_103",
+              "player": 2
+            },
+            "to": {
+              "id": 14,
+              "card_id": "EX1_382",
+              "player": 1
+            }
+          }
+        ],
+        [
+          "damaged",
+          {
+            "id": 14,
+            "card_id": "EX1_382",
+            "player": 1,
+            "amount": 4
+          }
+        ],
+        [
+          "damaged",
+          {
+            "id": 78,
+            "card_id": "GVG_103",
+            "player": 2,
+            "amount": 3
+          }
+        ],
+        [
+          "card_destroyed",
+          {
+            "player": 2,
+            "id": 78,
+            "card_id": "GVG_103"
+          }
+        ],
+        [
+          "card_destroyed",
+          {
+            "player": 1,
+            "id": 14,
+            "card_id": "EX1_382"
+          }
+        ],
+        [
+          "action_start",
+          {
+            "subtype": "ATTACK",
+            "from": {
+              "id": 77,
+              "card_id": "DS1_175",
+              "player": 2
+            },
+            "to": {
+              "id": 84,
+              "card_id": "CS2_101t",
+              "player": 1
+            }
+          }
+        ],
+        [
+          "damaged",
+          {
+            "id": 84,
+            "card_id": "CS2_101t",
+            "player": 1,
+            "amount": 1
+          }
+        ],
+        [
+          "damaged",
+          {
+            "id": 77,
+            "card_id": "DS1_175",
+            "player": 2,
+            "amount": 1
+          }
+        ],
+        [
+          "card_destroyed",
+          {
+            "player": 2,
+            "id": 77,
+            "card_id": "DS1_175"
+          }
+        ],
+        [
+          "card_destroyed",
+          {
+            "player": 1,
+            "id": 84,
+            "card_id": "CS2_101t"
+          }
+        ],
+        [
+          "action_start",
+          {
+            "subtype": "ATTACK",
+            "from": {
+              "id": 28,
+              "card_id": "GVG_107",
+              "player": 2
+            },
+            "to": {
+              "id": 4,
+              "card_id": "HERO_04",
+              "player": 1
+            }
+          }
+        ],
+        [
+          "damaged",
+          {
+            "id": 4,
+            "card_id": "HERO_04",
+            "player": 1,
+            "amount": 12
+          }
+        ],
+        [
+          "open_card",
+          {
+            "id": 86,
+            "card_id": "EX1_110"
+          }
+        ],
+        [
+          "open_card",
+          {
+            "id": 87,
+            "card_id": "GVG_103"
+          }
+        ],
+        [
+          "open_card",
+          {
+            "id": 88,
+            "card_id": "DS1_175"
+          }
+        ]
+      ]
+    },
+    {
+      "number": 16,
+      "player": "화이트베리",
+      "timestamp": 1418478836,
+      "events": [
+        [
+          "open_card",
+          {
+            "id": 89,
+            "card_id": "GVG_076a"
+          }
+        ],
+        [
+          "attached",
+          {
+            "card_id": 89,
+            "target": 87
+          }
+        ],
+        [
+          "card_put_in_play",
+          {
+            "player": 2,
+            "id": 86,
+            "card_id": "EX1_110"
+          }
+        ],
+        [
+          "card_put_in_play",
+          {
+            "player": 2,
+            "id": 87,
+            "card_id": "GVG_103"
+          }
+        ],
+        [
+          "card_put_in_play",
+          {
+            "player": 2,
+            "id": 88,
+            "card_id": "DS1_175"
+          }
+        ],
+        [
+          "card_drawn",
+          {
+            "player": 1,
+            "id": 19,
+            "card_id": ""
+          }
+        ]
+      ]
+    }
+  ],
+  "results": {
+    "화이트베리": "LOST",
+    "siuying": "WON"
+  }
+}

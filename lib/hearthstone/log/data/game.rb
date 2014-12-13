@@ -20,9 +20,7 @@ module Hearthstone
 
       # proceed to next turn
       def add_turn(number: number, player: player, timestamp: timestamp)
-        if !self.current_turn || number > self.current_turn.number
-          @turns << GameTurn.new(number: number, player: player, timestamp: timestamp)
-        end
+        @turns << GameTurn.new(number: number, player: player, timestamp: timestamp)
       end
 
       # current turn

@@ -26,6 +26,14 @@ To record a game, run following command:
 
 Start hearthstone, any games will be saved to ~/Documents/hearthstone-recorder/
 
+## Attributions
+
+Card names and text are all copyright Blizzard Entertainment.
+
+This app is not affiliated with Blizzard Entertainment in any way.
+
+Used data from [hearthstonejson.com](http://hearthstonejson.com/).
+
 ## Contributing
 
 1. Fork it ( https://github.com/[my-github-username]/hearthstone/fork )

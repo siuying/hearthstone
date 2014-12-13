@@ -29,7 +29,7 @@ module Hearthstone
             return [:mode, :solo]
           end
 
-        when /\[Power\] GameState.DebugPrintPower\(\) -\s*FULL_ENTITY.*Creating ID=(\d*) CardID=(?!GAME)(?!HERO)(.+)/
+        when /\[Power\] GameState.DebugPrintPower\(\) -\s*FULL_ENTITY.*Creating ID=(\d*) CardID=(?!GAME)(.+)/
           id = $1.to_i
           card = $2
           return [:open_card, id: id, card_id: card]
