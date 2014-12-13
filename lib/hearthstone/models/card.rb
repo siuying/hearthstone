@@ -11,6 +11,10 @@ module Hearthstone
       def hash
         id.hash
       end
+
+      def to_s
+        "<Card \"#{name}\">"
+      end
     end
   end
 end

@@ -1,4 +1,6 @@
 require 'json'
+require 'set'
+
 require_relative './card_store'
 
 module Hearthstone
@@ -11,12 +13,20 @@ module Hearthstone
         @card = card
         @zone = zone
       end
+
+      def eql?(other)
+        other.equal?(id) || id == other.id
+      end
+
+      def hash
+        id.hash
+      end
     end
 
     class Player
       attr_reader :id, :name, :first_player
       attr_accessor :hero, :hero_power
-      attr_reader :cards
+      attr_reader :deck, :hand, :play, :graveyard, :setaside
 
       def initialize(id: id, name: name, first_player: first_player, hero: hero, hero_power: hero_power)
         @id = id
@@ -24,27 +34,22 @@ module Hearthstone
         @first_player = first_player
         @hero = hero
         @hero_power = hero_power
-        @cards = Set.new
+
+        @deck = Set.new
+        @hand = Set.new
+        @play = Set.new
+        @graveyard = Set.new
+        @setaside = Set.new
       end
 
-      def deck
-        cards.select {|card| card.zone == :deck}
-      end
-
-      def hand
-        cards.select {|card| card.zone == :hand}
-      end
-
-      def play
-        cards.select {|card| card.zone == :play}
-      end
-
-      def graveyard
-        cards.select {|card| card.zone == :graveyard}
-      end
-
-      def setaside
-        cards.select {|card| card.zone == :setaside}
+      def move_card(card, to_zone)
+        [:deck, :hand, :play, :graveyard, :setaside].each do |zone|
+          if to_zone != zone
+            self.send(zone).delete(card)
+          else
+            self.send(to_zone) << card
+          end
+        end
       end
     end
 
@@ -74,20 +79,29 @@ module Hearthstone
 
       def card_added_to_deck(player_id: player_id, id: id, card_id: card_id)
         entity = entity_with_id(id, card_id: card_id)
+        entity.card = card_with_card_id(card_id)
         player = player_with_id(player_id)
         raise "Player #{player_id} not found!" unless player
 
-        player.cards << entity
-        entity.zone = :deck
+        player.move_card(entity, :deck)
       end
 
       def card_received(player_id: player_id, id: id, card_id: card_id)
         entity = entity_with_id(id, card_id: card_id)
+        entity.card = card_with_card_id(card_id)
         player = player_with_id(player_id)
         raise "Player #{player_id} not found!" unless player
 
-        player.cards << entity
-        entity.zone = :hand
+        player.move_card(entity, :hand)
+      end
+
+      def card_drawn(player_id: player_id, id: id, card_id: card_id)
+        entity = entity_with_id(id, card_id: card_id)
+        entity.card = card_with_card_id(card_id)
+        player = player_with_id(player_id)
+        raise "Player #{player_id} not found!" unless player
+
+        player.move_card(entity, :hand)
       end
 
       def process_turn(turn)

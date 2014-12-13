@@ -61,14 +61,34 @@ describe Hearthstone::Models::Game do
 
     context "#card_received" do
       it "adds card into player hand" do
+        player = game.player_with_id(2)
+
+        game.card_added_to_deck(player_id: 2, id: 58, card_id: "")
+        expect(player).to_not be_nil
+        expect(player.hand).to be_empty
+        expect(player.deck).to_not be_empty
+        
         game.card_received(player_id: 2, id: 58, card_id: "EX1_556")
 
         entity = game.entity_with_id(58)
         expect(entity).to_not be_nil
         expect(entity.card).to eq(game.card_with_card_id("EX1_556"))
+        expect(player.hand).to include(entity)
+        expect(player.deck).to be_empty
+      end
+    end
 
+    context "#card_drawn" do
+      it "adds card into player hands" do
         player = game.player_with_id(2)
+
         expect(player).to_not be_nil
+        expect(player.hand).to be_empty
+
+        game.card_drawn(player_id: 2, id: 58, card_id: "EX1_556")
+        entity = game.entity_with_id(58)
+        expect(entity).to_not be_nil
+        expect(entity.card).to eq(game.card_with_card_id("EX1_556"))
         expect(player.hand).to include(entity)
       end
     end
