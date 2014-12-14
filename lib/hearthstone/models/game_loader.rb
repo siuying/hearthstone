@@ -21,15 +21,25 @@ module Hearthstone
         end
       end
 
-      def load_turn(number: 0, player: nil, events: [])
+      def load_turns
+        data[:turns].each do |turn|
+          load_turn(number: turn[:number], events: turn[:events])
+        end
+      end
+
+      def load_turn(number: 0, events: [])
+        game.turn = number
+
         events.each do |event|
+          load_event(event[0], event[1])
         end
       end
 
       def load_event(name, data)
-        case name
-        when :open_card, :card_received, :card_revealed, :card_added_to_deck, :card_drawn, :card_destroyed, :card_put_in_play
-          game.send(name, data)
+        event_sym = name.to_sym
+        case event_sym
+        when :open_card, :card_received, :card_revealed, :card_played, :card_added_to_deck, :card_drawn, :card_discarded, :card_destroyed, :card_put_in_play
+          game.send(event_sym, data)
         when :damaged
           game.apply_damage(id: data[:id], amount: data[:amount])
         when :attached
