@@ -129,6 +129,29 @@ describe Hearthstone::Models::Game do
         expect(player.play).to include(target)
       end
     end
+
+    context "#card_destroyed" do
+      it "move cards to graveyard" do
+        player = game.player_with_id(2)
+        game.open_card(id: 57, card_id: "FP1_028")
+
+        target = game.entity_with_id(57)
+        game.card_destroyed(player_id: 2, id: 57)
+        expect(player.graveyard).to include(target)
+      end
+    end
+
+    context "#card_put_in_play" do
+      it "put cards in play" do
+        player = game.player_with_id(2)
+
+        game.card_put_in_play(player_id: 2, id: 78, card_id: "GVG_103")
+        target = game.entity_with_id(78)
+        expect(target).to_not be_nil
+        expect(target.card.id).to eq("GVG_103")
+        expect(player.play).to include(target)
+      end
+    end
   end
 
 end

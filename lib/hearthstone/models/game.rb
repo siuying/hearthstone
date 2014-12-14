@@ -142,6 +142,23 @@ module Hearthstone
         player.move_card(target, :play)
       end
 
+      def card_destroyed(player_id: nil, id: nil)
+        player = player_with_id(player_id)
+        target = entity_with_id(id)
+        raise "Player #{player_id} not found!" unless player
+
+        player.move_card(target, :graveyard)
+      end
+
+      def card_put_in_play(player_id: nil, id: nil, card_id: nil)
+        entity = entity_with_id(id, card_id: card_id)
+        entity.card = card_with_card_id(card_id)
+        player = player_with_id(player_id)
+        raise "Player #{player_id} not found!" unless player
+
+        player.move_card(entity, :play)
+      end
+
       def process_turn(turn)
       end
 
