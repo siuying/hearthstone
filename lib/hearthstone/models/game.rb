@@ -2,82 +2,14 @@ require 'json'
 require 'set'
 
 require_relative './card_store'
+require_relative './entity'
+require_relative './player'
 
 module Hearthstone
   module Models
-    # represent an object in game
-    class Entity
-      attr_accessor :id, :card, :damaged
-      attr_reader :attachments
-
-      def initialize(id: nil, card: nil)
-        @id = id
-        @card = card
-        @damaged = 0
-        @attachments = []
-      end
-
-      def eql?(other)
-        other.equal?(id) || id == other.id
-      end
-
-      def hash
-        id.hash
-      end
-
-      def attach(card)
-        attachments << card
-      end
-
-      def detach(card)
-        attachments.delete(card)
-      end
-
-      def name
-        card.name
-      end
-
-      def to_s
-        "<Entity ##{id} \"#{card.name}\">"
-      end
-    end
-
-    class Player
-      attr_reader :id, :name, :first_player
-      attr_accessor :hero, :hero_power
-      attr_reader :deck, :hand, :play, :graveyard, :setaside
-
-      def initialize(id: nil, name: nil, first_player: nil, hero: nil, hero_power: nil)
-        @id = id
-        @name = name
-        @first_player = first_player
-        @hero = hero
-        @hero_power = hero_power
-
-        @deck = Set.new
-        @hand = Set.new
-        @play = Set.new
-        @graveyard = Set.new
-        @setaside = Set.new
-      end
-
-      def move_card(card, to_zone)
-        [:deck, :hand, :play, :graveyard, :setaside].each do |zone|
-          if to_zone != zone
-            self.send(zone).delete(card)
-          else
-            self.send(to_zone) << card
-          end
-        end
-      end
-
-      def to_s
-        "<Player ##{id} \"#{name}\">"
-      end
-    end
-
     class Game
       attr_reader :store, :entities, :players
+      attr_accessor :turn
 
       def initialize(store=CardStore.new)
         @store = store
@@ -98,7 +30,7 @@ module Hearthstone
         entity_with_id(id).card = card_with_card_id(card_id)
       end
 
-      def card_revealed(id: nil, card_id: nil)
+      def card_revealed(id: nil, card_id: nil, player_id: nil)
         entity_with_id(id).card = card_with_card_id(card_id)
       end
 
@@ -135,27 +67,30 @@ module Hearthstone
         target.attach(attachment)
       end
 
-      def apply_damage(id: nil, amount: 0)
+      def apply_damage(id: nil, amount: 0, card_id: nil, player_id: nil)
         target = entity_with_id(id)
         target.damaged = amount
       end
       alias_method :damage, :apply_damage
 
-      def card_played(player_id: nil, id: nil)
+      def card_played(player_id: nil, id: nil, card_id: nil)
         player = player_with_id(player_id)
         target = entity_with_id(id)
+        target.card = card_with_card_id(card_id)
         raise "Player #{player_id} not found!" unless player
+        #binding.pry
 
         player.move_card(target, :play)
       end
 
-      def card_destroyed(player_id: nil, id: nil)
+      def card_destroyed(player_id: nil, id: nil, card_id: nil)
         player = player_with_id(player_id)
         target = entity_with_id(id)
         raise "Player #{player_id} not found!" unless player
 
         player.move_card(target, :graveyard)
       end
+      alias_method :card_discarded, :card_destroyed
 
       def card_put_in_play(player_id: nil, id: nil, card_id: nil)
         entity = entity_with_id(id, card_id: card_id)
@@ -188,6 +123,28 @@ module Hearthstone
           raise "Card #{card_id} not found!" unless card
         end
         card
+      end
+
+      ## Public
+
+      def to_s
+        player1 = self.players.first
+        player2 = self.players.last
+
+        """======================= Turn ##{turn} =====================
+#{player1.name} (#{player1.hero.current_health})
+======================================================
+
+#{player1.play.collect(&:to_s).join("\n")}
+
+----------------------------------------------------
+
+#{player2.play.collect(&:to_s).join("\n")}
+
+======================================================
+#{player2.name} (#{player2.hero.current_health})
+======================================================
+"""
       end
     end
   end
