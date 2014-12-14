@@ -124,35 +124,27 @@ describe Hearthstone::Models::GameLoader do
     it "should load a game" do
       @data[:turns].each do |turn|
         @loader.load_turn(number: turn[:number], events: turn[:events])
-        # binding.pry
-        puts @game.to_s
-        puts "\n\n"
 
-        # @game.players.each do |player|
-        #   # deck cards always unknown
-        #   player.deck.each do |entity|
-        #     expect(entity.card).to be_nil
-        #   end
+        @game.players.each do |player|
+          # deck cards always unknown
+          player.deck.each do |entity|
+            expect(entity.card).to be_nil
+          end
 
-        #   # graveyard cards always known
-        #   player.graveyard.each do |entity|
-        #     expect(entity.card).to_not be_nil
-        #   end
+          # graveyard cards always known
+          player.graveyard.each do |entity|
+            expect(entity.card).to_not be_nil
+          end
 
-        #   # graveyard cards always known
-        #   player.play.each do |entity|
-        #     expect(entity.card).to_not be_nil
-        #   end
-
-        #   # hands cards only known for current player
-        #   player.hand.each do |entity|
-        #     if player.name == "siuying"
-        #       expect(entity.card).to_not be_nil
-        #     else
-        #       expect(entity.card).to be_nil
-        #     end
-        #   end
-        # end
+          # hands cards only known for current player
+          player.hand.each do |entity|
+            if player.name == "siuying"
+              expect(entity.card).to_not be_nil
+            else
+              expect(entity.card).to be_nil
+            end
+          end
+        end
       end
 
     end
