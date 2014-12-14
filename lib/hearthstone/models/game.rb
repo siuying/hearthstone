@@ -33,6 +33,10 @@ module Hearthstone
         attachments.delete(card)
       end
 
+      def name
+        card.name
+      end
+
       def to_s
         "<Entity ##{id} \"#{card.name}\">"
       end
@@ -80,6 +84,8 @@ module Hearthstone
         @entities = {}
         @players = []
       end
+
+      ## Events
 
       def add_player(id: nil, name: nil, first_player: nil, hero_id: nil, hero_card_id: nil, hero_power_id: nil, hero_power_card_id: nil)
         hero = entity_with_id(hero_id, card_id: hero_card_id)
@@ -159,8 +165,7 @@ module Hearthstone
         player.move_card(entity, :play)
       end
 
-      def process_turn(turn)
-      end
+      ## Accessors
 
       def entity_with_id(id, card_id: nil)
         entity = entities[id]
