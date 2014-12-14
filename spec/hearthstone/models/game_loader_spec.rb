@@ -112,4 +112,50 @@ describe Hearthstone::Models::GameLoader do
     end
   end
 
+  context "#load_turns" do
+      before(:each) do
+      filename = File.join(File.dirname(__FILE__), "../../fixtures/gamelog1.json")
+      @data = JSON.parse(open(filename).read, symbolize_names: true)
+      @loader = Hearthstone::Models::GameLoader.new(@data)
+      @loader.load_players
+      @game = @loader.game
+    end
+
+    it "should load a game" do
+      @data[:turns].each do |turn|
+        @loader.load_turn(number: turn[:number], events: turn[:events])
+        # binding.pry
+        puts @game.to_s
+        puts "\n\n"
+
+        # @game.players.each do |player|
+        #   # deck cards always unknown
+        #   player.deck.each do |entity|
+        #     expect(entity.card).to be_nil
+        #   end
+
+        #   # graveyard cards always known
+        #   player.graveyard.each do |entity|
+        #     expect(entity.card).to_not be_nil
+        #   end
+
+        #   # graveyard cards always known
+        #   player.play.each do |entity|
+        #     expect(entity.card).to_not be_nil
+        #   end
+
+        #   # hands cards only known for current player
+        #   player.hand.each do |entity|
+        #     if player.name == "siuying"
+        #       expect(entity.card).to_not be_nil
+        #     else
+        #       expect(entity.card).to be_nil
+        #     end
+        #   end
+        # end
+      end
+
+    end
+  end
+
 end

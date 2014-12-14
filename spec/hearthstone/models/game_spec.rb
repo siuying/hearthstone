@@ -125,7 +125,7 @@ describe Hearthstone::Models::Game do
         game.open_card(id: 57, card_id: "FP1_028")
 
         target = game.entity_with_id(57)
-        game.card_played(player_id: 2, id: 57)
+        game.card_played(player_id: 2, id: 57, card_id: "FP1_028")
         expect(player.play).to include(target)
       end
     end
