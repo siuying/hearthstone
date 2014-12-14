@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["francis@ignition.hk"]
   spec.summary       = %q{Utlities for Hearthstone.}
   spec.description   = %q{Utlities for Hearthstone. First, a game recorder.}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/siuying/hearthstone"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
