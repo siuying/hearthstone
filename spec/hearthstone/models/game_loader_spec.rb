@@ -16,12 +16,12 @@ describe Hearthstone::Models::GameLoader do
       expect(game.players.count).to eq(2)
 
       first = game.players.first
-      expect(first.name).to eq("siuying")
-      expect(first.hero.name).to eq("Rexxar")
+      expect(first.name).to eq("ALzard")
+      expect(first.hero.name).to eq("Thrall")
 
-      second = game.players.last
-      expect(second.name).to eq("화이트베리")
-      expect(second.hero.name).to eq("Uther Lightbringer")
+      last = game.players.last
+      expect(last.name).to eq("siuying")
+      expect(last.hero.name).to eq("Rexxar")
     end
   end
 
