@@ -4,7 +4,7 @@ module Hearthstone
       attr_accessor :id, :name, :first_player
       attr_accessor :hero, :hero_power
 
-      def initialize(id: id=nil, name: name=nil)
+      def initialize(id: nil, name: nil)
         @name = name
         @id = id
         @first_player = false

@@ -8,7 +8,7 @@ module Hearthstone
     # represent an object in game
     class Entity
       attr_accessor :id, :card
-      def initialize(id: id, card: card)
+      def initialize(id: nil, card: nil)
         @id = id
         @card = card
       end
@@ -31,7 +31,7 @@ module Hearthstone
       attr_accessor :hero, :hero_power
       attr_reader :deck, :hand, :play, :graveyard, :setaside
 
-      def initialize(id: id, name: name, first_player: first_player, hero: hero, hero_power: hero_power)
+      def initialize(id: nil, name: nil, first_player: nil, hero: nil, hero_power: nil)
         @id = id
         @name = name
         @first_player = first_player
@@ -69,22 +69,22 @@ module Hearthstone
         @players = []
       end
 
-      def add_player(id: id, name: name, first_player: first_player, hero_id: hero_id, hero_card_id: hero_card_id, hero_power_id: hero_power_id, hero_power_card_id: hero_power_card_id)
+      def add_player(id: nil, name: nil, first_player: nil, hero_id: nil, hero_card_id: nil, hero_power_id: nil, hero_power_card_id: nil)
         hero = entity_with_id(hero_id, card_id: hero_card_id)
         hero_power = entity_with_id(hero_power_id, card_id: hero_power_card_id)
         player = Player.new(id: id, name: name, first_player: first_player, hero: hero, hero_power: hero_power)
         self.players << player
       end
 
-      def open_card(id: id, card_id: card_id)
+      def open_card(id: nil, card_id: nil)
         entity_with_id(id).card = card_with_card_id(card_id)
       end
 
-      def card_revealed(id: id, card_id: card_id)
+      def card_revealed(id: nil, card_id: nil)
         entity_with_id(id).card = card_with_card_id(card_id)
       end
 
-      def card_added_to_deck(player_id: player_id, id: id, card_id: card_id)
+      def card_added_to_deck(player_id: nil, id: nil, card_id: nil)
         entity = entity_with_id(id, card_id: card_id)
         entity.card = card_with_card_id(card_id)
         player = player_with_id(player_id)
@@ -93,7 +93,7 @@ module Hearthstone
         player.move_card(entity, :deck)
       end
 
-      def card_received(player_id: player_id, id: id, card_id: card_id)
+      def card_received(player_id: nil, id: nil, card_id: nil)
         entity = entity_with_id(id, card_id: card_id)
         entity.card = card_with_card_id(card_id)
         player = player_with_id(player_id)
@@ -102,7 +102,7 @@ module Hearthstone
         player.move_card(entity, :hand)
       end
 
-      def card_drawn(player_id: player_id, id: id, card_id: card_id)
+      def card_drawn(player_id: nil, id: nil, card_id: nil)
         entity = entity_with_id(id, card_id: card_id)
         entity.card = card_with_card_id(card_id)
         player = player_with_id(player_id)
@@ -114,7 +114,7 @@ module Hearthstone
       def process_turn(turn)
       end
 
-      def entity_with_id(id, card_id: card_id)
+      def entity_with_id(id, card_id: nil)
         entity = entities[id]
         unless entity
           entity = Entity.new(id: id, card: card_with_card_id(card_id))

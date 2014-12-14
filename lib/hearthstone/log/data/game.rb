@@ -19,7 +19,7 @@ module Hearthstone
       end
 
       # proceed to next turn
-      def add_turn(number: number, player: player, timestamp: timestamp)
+      def add_turn(number: nil, player: nil, timestamp: nil)
         @turns << GameTurn.new(number: number, player: player, timestamp: timestamp)
       end
 
@@ -29,7 +29,7 @@ module Hearthstone
       end
 
       # create or get the player, with given id or name
-      def player_with_id_or_name(id: id, name: name)
+      def player_with_id_or_name(id: nil, name: nil)
         player = players.detect {|p| (id && p.id == id) || (name && p.name == name) }
         unless player
           player = GamePlayer.new(name: name, id: id)

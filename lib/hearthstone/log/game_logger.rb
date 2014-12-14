@@ -7,7 +7,7 @@ module Hearthstone
       attr_reader :parser, :debug
       attr_accessor :game, :delegate, :mode
 
-      def initialize(delegate, debug: debug=false)
+      def initialize(delegate, debug: false)
         @delegate = delegate
         @parser = Parser.new
         @game = Game.new(nil)
@@ -74,25 +74,25 @@ module Hearthstone
         end
       end
 
-      def on_player_id(name: name, player_id: player_id)
+      def on_player_id(name: nil, player_id: nil)
         player = self.game.player_with_id_or_name(name: name, id: player_id)
         player.name = name
         player.id = player_id
       end
 
-      def on_first_player(name: name)
+      def on_first_player(name: nil)
         self.game.player_with_id_or_name(name: name).first_player = true
       end
 
-      def on_set_hero(player: player, id: id, card_id: card_id)
+      def on_set_hero(player: nil, id: nil, card_id: nil)
         self.game.player_with_id_or_name(id: player).hero = {id: id, card_id: card_id}
       end
 
-      def on_set_hero_power(player: player, id: id, card_id: card_id)
+      def on_set_hero_power(player: nil, id: nil, card_id: nil)
         self.game.player_with_id_or_name(id: player).hero_power = {id: id, card_id: card_id}
       end
 
-      def on_game_over(name: name, state: state)
+      def on_game_over(name: nil, state: nil)
         self.game.results[name] = state
 
         if delegate.respond_to?(:on_game_over)
@@ -102,12 +102,12 @@ module Hearthstone
         end
       end
 
-      def on_hero_destroyed(player: player, id: id, card_id: card_id)
+      def on_hero_destroyed(player: nil, id: nil, card_id: nil)
         # when hero destroyed, the game is ended, we should proceed to next game
         self.game = Game.new(self.mode)
       end
 
-      def on_turn_start(name: name, timestamp: timestamp)
+      def on_turn_start(name: nil, timestamp: nil)
         self.game.current_turn.player = name
         self.game.current_turn.timestamp = timestamp
       end
