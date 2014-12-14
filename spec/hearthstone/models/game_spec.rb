@@ -92,6 +92,20 @@ describe Hearthstone::Models::Game do
         expect(player.hand).to include(entity)
       end
     end
+
+    context "#card_attached" do
+      it "adds effect to a card" do
+        player = game.player_with_id(2)
+        game.open_card(id: 69, card_id: "FP1_028e")
+        game.open_card(id: 57, card_id: "FP1_028")
+
+        target = game.entity_with_id(57)
+        attachment = game.entity_with_id(69)
+        game.card_attached(attachment_id: attachment.id, target_id: target.id)
+
+        expect(target.attachments).to include(attachment)
+      end
+    end
   end
 
 end

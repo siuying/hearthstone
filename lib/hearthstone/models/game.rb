@@ -8,9 +8,12 @@ module Hearthstone
     # represent an object in game
     class Entity
       attr_accessor :id, :card
+      attr_reader :attachments
+
       def initialize(id: nil, card: nil)
         @id = id
         @card = card
+        @attachments = []
       end
 
       def eql?(other)
@@ -19,6 +22,14 @@ module Hearthstone
 
       def hash
         id.hash
+      end
+
+      def attach(card)
+        attachments << card
+      end
+
+      def detach(card)
+        attachments.delete(card)
       end
 
       def to_s
@@ -109,6 +120,12 @@ module Hearthstone
         raise "Player #{player_id} not found!" unless player
 
         player.move_card(entity, :hand)
+      end
+
+      def card_attached(attachment_id: nil, target_id: nil)
+        target      = entity_with_id(target_id)
+        attachment  = entity_with_id(attachment_id)
+        target.attach(attachment)
       end
 
       def process_turn(turn)
