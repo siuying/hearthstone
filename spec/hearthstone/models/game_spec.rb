@@ -106,6 +106,29 @@ describe Hearthstone::Models::Game do
         expect(target.attachments).to include(attachment)
       end
     end
+
+    context "#apply_damage" do
+      it "apply damage to a card" do
+        player = game.player_with_id(2)
+        game.open_card(id: 57, card_id: "FP1_028")
+
+        target = game.entity_with_id(57)
+        game.apply_damage(id: 57, amount: 2)
+
+        expect(target.damaged).to eq(2)
+      end
+    end
+
+    context "#card_played" do
+      it "move cards in play" do
+        player = game.player_with_id(2)
+        game.open_card(id: 57, card_id: "FP1_028")
+
+        target = game.entity_with_id(57)
+        game.card_played(player_id: 2, id: 57)
+        expect(player.play).to include(target)
+      end
+    end
   end
 
 end

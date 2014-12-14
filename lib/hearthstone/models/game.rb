@@ -7,12 +7,13 @@ module Hearthstone
   module Models
     # represent an object in game
     class Entity
-      attr_accessor :id, :card
+      attr_accessor :id, :card, :damaged
       attr_reader :attachments
 
       def initialize(id: nil, card: nil)
         @id = id
         @card = card
+        @damaged = 0
         @attachments = []
       end
 
@@ -126,6 +127,19 @@ module Hearthstone
         target      = entity_with_id(target_id)
         attachment  = entity_with_id(attachment_id)
         target.attach(attachment)
+      end
+
+      def apply_damage(id: nil, amount: 0)
+        target = entity_with_id(id)
+        target.damaged = amount
+      end
+
+      def card_played(player_id: nil, id: nil)
+        player = player_with_id(player_id)
+        target = entity_with_id(id)
+        raise "Player #{player_id} not found!" unless player
+
+        player.move_card(target, :play)
       end
 
       def process_turn(turn)
