@@ -139,6 +139,7 @@ module Hearthstone
         target = entity_with_id(id)
         target.damaged = amount
       end
+      alias_method :damage, :apply_damage
 
       def card_played(player_id: nil, id: nil)
         player = player_with_id(player_id)

@@ -28,8 +28,12 @@ module Hearthstone
 
       def load_event(name, data)
         case name
-        when :open_card, :card_received, :card_revealed
+        when :open_card, :card_received, :card_revealed, :card_added_to_deck, :card_drawn, :card_destroyed, :card_put_in_play
           game.send(name, data)
+        when :damaged
+          game.apply_damage(id: data[:id], amount: data[:amount])
+        when :attached
+          game.card_attached(attachment_id: data[:id], target_id: data[:target])
         end          
       end
 
