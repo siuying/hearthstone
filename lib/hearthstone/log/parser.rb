@@ -118,7 +118,7 @@ module Hearthstone
         when "TURN"
           return [:turn, state.to_i]
         when "ATTACHED"
-          return [:attached, card_id: player.to_i, target: state.to_i]
+          return [:attached, id: player.to_i, target: state.to_i]
         else
           raise "unknown entity: %s, %s, %s" % [type, player, state] if debug
         end
