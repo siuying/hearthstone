@@ -1,6 +1,6 @@
 # Hearthstone
 
-Utlities for Hearthstone.
+Utilities for Hearthstone.
 
 ## Installation
 
