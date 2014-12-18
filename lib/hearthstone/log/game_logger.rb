@@ -84,11 +84,11 @@ module Hearthstone
         self.game.player_with_id_or_name(name: name).first_player = true
       end
 
-      def on_set_hero(player_id: nil, id: nil, card_id: nil)
+      def on_set_hero(player_id: nil, id: nil, card_id: nil, zone_pos: 0)
         self.game.player_with_id_or_name(id: player_id).hero = {id: id, card_id: card_id}
       end
 
-      def on_set_hero_power(player_id: nil, id: nil, card_id: nil)
+      def on_set_hero_power(player_id: nil, id: nil, card_id: nil, zone_pos: 0)
         self.game.player_with_id_or_name(id: player_id).hero_power = {id: id, card_id: card_id}
       end
 
@@ -102,7 +102,7 @@ module Hearthstone
         end
       end
 
-      def on_hero_destroyed(player_id: nil, id: nil, card_id: nil)
+      def on_hero_destroyed(player_id: nil, id: nil, card_id: nil, zone_pos: 0)
         # when hero destroyed, the game is ended, we should proceed to next game
         self.game = Game.new(self.mode)
       end
