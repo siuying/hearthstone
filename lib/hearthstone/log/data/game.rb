@@ -21,6 +21,12 @@ module Hearthstone
       # proceed to next turn
       def add_turn(number: nil, player: nil, timestamp: nil)
         @turns << GameTurn.new(number: number, player: player, timestamp: timestamp)
+
+        if player && number
+          is_first_player = (number % 2 == 1)
+          the_player = players.detect {|p| p.first_player == is_first_player}
+          the_player.name = player if the_player
+        end
       end
 
       # current turn
