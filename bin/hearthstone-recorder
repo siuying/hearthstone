@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
 
 require 'claide'
-
-require_relative '../lib/hearthstone'
+require_relative '../lib/hearthstone/commands/recorder_command'
 
 RecorderCommand.run(ARGV)
